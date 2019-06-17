@@ -9,6 +9,7 @@ class Cliente
 
 	protected:
 			int numero;
+			double descuento;
 	public:
 			Cliente();
 			
