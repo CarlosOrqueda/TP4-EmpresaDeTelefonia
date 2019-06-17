@@ -1,8 +1,12 @@
 #include "cliente.hpp"
 
-Cliente::Cliente()
+Precio::Precio():Cliente()
 {
 	numero = 0;
+}
+Precio::Precio(double _precio,double _descuento):Cliente(int _numero)
+{
+	numero = _numero;
 }
 void Cliente::asignarNumero(int _numero)
 {
