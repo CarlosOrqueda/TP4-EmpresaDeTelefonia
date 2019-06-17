@@ -3,14 +3,13 @@
 #include <iostream>
 using namespace std;
 #include "Nodo.hpp"
+#include "cliente.hpp"
 
-template <typename DatoABB>
+
 class Abb{
 
 	private:
-
-	DatoABB* dato;
-	Nodo<DatoABB>* raiz;
+	Nodo<Cliente>* raiz;
 
 	public:
 
@@ -20,12 +19,20 @@ class Abb{
 	/*
 	* No puede insertar la misma clave.
 	*/
-	void insertar(DatoABB* dato);
+	void insertar(Cliente* dato);
 
 	/*
 	* Elimina el dato cuya clave coincide con la enviada.
 	*/
-	void borrar(DatoABB* dato);
+	void borrar(Cliente* dato);
+
+	void eliminarNodo(Nodo<Cliente>* nodoBuscado);
+
+	Nodo<Cliente>* minimo(Nodo<Cliente>* menor);
+
+    void reemplazar(Nodo<Cliente>* nodo, Nodo<Cliente>* nuevoNodo);
+
+    void destruirNodo(Nodo<Cliente>* nodo);
 
 	/*
 	* Busca un dato en el arbol.
@@ -33,7 +40,7 @@ class Abb{
 	* Debe estar inicializado como para poder utilizar la función de comparación.
 	* Devuelve el dato encontrado o NULL si no lo encuentra.
 	*/
-	DatoABB* buscar(DatoABB* dato);
+	Nodo<Cliente>* buscar(Cliente* dato);
 
 	/*
 	* Determina si el árbol está vacío. 
@@ -41,43 +48,14 @@ class Abb{
 	*/
 	bool estaVacio();
 
+	void insertarRaiz(Nodo<Cliente>* nuevaRaiz);
+
+	Nodo<Cliente>* obtenerRaiz();
+
 	/*
 	* Destruye el arbol liberando la memoria reservada por este y todos sus nodos y hojas.
 	* Adicionalmente invoca el destructor con cada dato presente en el arbol.
 	*/
 	~Abb();
-
 };
-
-template <typename DatoABB>
-Abb<DatoABB>::Abb(){
-
-}
-template <typename DatoABB>
-Abb<DatoABB>::~Abb(){
-
-}
-
-template <typename DatoABB>
-void Abb<DatoABB>::insertar(DatoABB* dato){
-
-}
-
-template <typename DatoABB>
-void Abb<DatoABB>::borrar(DatoABB* dato){
-
-}
-
-template <typename DatoABB>
-DatoABB* Abb<DatoABB>::buscar(DatoABB* dato){
-
-}
-
-template <typename DatoABB>
-bool Abb<DatoABB>::estaVacio(){
-
-	return true;
-}
-
-
 #endif
