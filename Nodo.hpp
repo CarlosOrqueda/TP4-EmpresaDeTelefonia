@@ -9,32 +9,44 @@ class Nodo{
 		
 		private:
 		DatoNodo* data;
-    	Nodo<DatoNodo>* izquierda, derecha;
+    	Nodo<DatoNodo>* izquierda;
+		Nodo<DatoNodo>* derecha;
+		Nodo<DatoNodo>* padre;
 
 		public:
 
-		Nodo(DatoNodo* data, Nodo<DatoNodo>* izquierda = NULL, Nodo<DatoNodo>* derecha = NULL){
-			this->asignarData(data);
-			this->asignarizquierda(izquierda);
-			this->asignarDerecha(derecha);
+		Nodo(DatoNodo* data, Nodo<DatoNodo>* izquierda = NULL, Nodo<DatoNodo>* derecha = NULL, Nodo<DatoNodo>* padre = NULL){
+			asignarData(data);
+			asignarizquierda(izquierda);
+			asignarDerecha(derecha);
+			asignarPadre(padre);
 		}
-		DatoNodo obtenerData(){
-			return this->DatoNodo;
+		DatoNodo* obtenerData(){
+			return data;
 		}
 		Nodo<DatoNodo>* obtenerizquierda(){
-			return this->izquierda;
+			return izquierda;
 		}
 		Nodo<DatoNodo>* obtenerDerecha(){
-			return this->derecha;
+			return derecha;
 		}
+
+		Nodo<DatoNodo>* obtenerPadre(){
+            return padre;
+        }
+
 		void asignarData(DatoNodo* data){
-			this->data = data;
+			Nodo::data = data;
 		}
 		void asignarizquierda(Nodo<DatoNodo>* izquierda){
-			this->izquierda = izquierda;
+			Nodo::izquierda = izquierda;
 		}
 		void asignarDerecha(Nodo<DatoNodo>* derecha){
-			this->derecha = derecha;
+			Nodo::derecha = derecha;
+		}
+
+        void asignarPadre(Nodo<DatoNodo>* padre){
+            Nodo::padre = padre;
 		}
 };
 #endif
