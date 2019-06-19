@@ -3,11 +3,16 @@
 Individuo::Individuo():Cliente()
 {
 	nombre = "";
+}Individuo::Individuo(string nombre, int numero){
+	this->asignarNombre(nombre);
+	this->asignarNumero(numero);
+
 }
-Individuo::Individuo(double _precio,double _descuento,int _numero, string _nombre):Cliente(_precio,_descuento,_numero)
-{
-	nombre = _nombre;
+Individuo::Individuo(string nombre){
+	asignarNombre(nombre);
+
 }
+
 void Individuo::asignarNombre(string _nombre)
 {
 	nombre = _nombre;
@@ -16,7 +21,13 @@ string Individuo::obtenerNombre()
 {
 	return nombre;
 }
-/*Individuo::~Individuo()
+Individuo::~Individuo()
 {
 	
-}*/
+}
+void Individuo::pagarMontoFinal(){
+	
+}			
+void Individuo::aplicarDescuento(double& precio){
+	cout<<precio;
+}

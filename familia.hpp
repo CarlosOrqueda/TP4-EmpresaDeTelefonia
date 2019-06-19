@@ -2,7 +2,7 @@
 #define FAMILIA
 
 #include "cliente.hpp"
-
+#include "abonable.hpp"
 class Familia: public Cliente
 {
 	private:
@@ -10,10 +10,10 @@ class Familia: public Cliente
 			string integrantes[10];
 	public:
 			Familia();
-			Familia(double _precio,double _descuento,int _numero, int _tope, string _integrantes);
-			
-			void agregarIntegrante(int _tope, string _nombre);
-			string obtenerIntegrantes();
+			void agregarIntegrante(string _nombre);
+			void mostrarIntegrantes();
+			void pagarMontoFinal();
+			void aplicarDescuento(double& precio);
 			
 			~Familia();
 };
