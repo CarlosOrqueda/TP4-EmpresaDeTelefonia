@@ -3,14 +3,14 @@
 
 #include "precio.hpp"
 
-class Cliente
+class Cliente : public Precio
 {
 
 	protected:
 			int numero;
 	public:
 			Cliente();
-			Cliente(int _numero);
+			Cliente(double _precio,double _descuento,int _numero);
 			void asignarNumero(int _numero);
 			int obtenerNumero();
 			

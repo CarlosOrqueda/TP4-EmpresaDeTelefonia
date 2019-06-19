@@ -1,10 +1,10 @@
-#include "cliente.hpp"
+#include "individuo.hpp"
 
-Cliente::Cliente():Individuo()
+Individuo::Individuo():Cliente()
 {
 	nombre = "";
 }
-Cliente::Cliente(int _numero):Individuo(string _nombre)
+Individuo::Individuo(double _precio,double _descuento,int _numero, string _nombre):Cliente(_precio,_descuento,_numero)
 {
 	nombre = _nombre;
 }
@@ -16,7 +16,7 @@ string Individuo::obtenerNombre()
 {
 	return nombre;
 }
-Individuo::~Individuo()
+/*Individuo::~Individuo()
 {
 	
-}
+}*/

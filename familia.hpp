@@ -6,12 +6,14 @@
 class Familia: public Cliente
 {
 	private:
-			string* integrantes;
+			int tope;
+			string integrantes[10];
 	public:
 			Familia();
+			Familia(double _precio,double _descuento,int _numero, int _tope, string _integrantes);
 			
-			void agregarIntegrante(string _nombre);
-			string* obtenerIntegrantes();
+			void agregarIntegrante(int _tope, string _nombre);
+			string obtenerIntegrantes();
 			
 			~Familia();
 };

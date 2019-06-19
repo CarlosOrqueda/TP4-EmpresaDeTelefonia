@@ -9,7 +9,7 @@ class Individuo: public Cliente
 			string nombre;
 	public:
 			Individuo();
-			Individuo(string _nombre);
+			Individuo(double _precio,double _descuento,int _numero, string _nombre);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
 			

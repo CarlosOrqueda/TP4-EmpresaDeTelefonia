@@ -2,16 +2,17 @@
 
 Precio::Precio()
 {
-	
+	precioBase = 0;
+	descuento = 0;
 }
 Precio::Precio(double _precio,double _descuento)
 {
-	precio = _precio;
+	precioBase = _precio;
 	descuento = _descuento;
 }
 void Precio::asignarPrecioBase(double _precio)
 {
-	precio = _precio;
+	precioBase = _precio;
 }
 void Precio::asignarDescuento(double _descuento)
 {
@@ -19,17 +20,17 @@ void Precio::asignarDescuento(double _descuento)
 }
 double Precio::obtenerPrecioBase()
 {
-	return _precio;
+	return precioBase;
 }
 double Precio::obtenerDescuento()
 {
-	return _descuento;
+	return descuento;
 }
 double Precio::calcularPrecioFinal()
 {
-	return (precio-(precio*descuento));
+	return (precioBase-(precioBase*descuento));
 }
-Precio::~Precio()
+/*Precio::~Precio()
 {
 	
-}
+}*/

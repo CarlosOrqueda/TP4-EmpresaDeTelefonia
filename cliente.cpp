@@ -1,10 +1,10 @@
 #include "cliente.hpp"
 
-Precio::Precio():Cliente()
+Cliente::Cliente():Precio()
 {
 	numero = 0;
 }
-Precio::Precio(double _precio,double _descuento):Cliente(int _numero)
+Cliente::Cliente(double _precio,double _descuento,int _numero):Precio(_precio,_descuento)
 {
 	numero = _numero;
 }
@@ -16,7 +16,7 @@ int Cliente::obtenerNumero()
 {
 	return numero;
 }
-Cliente::~Cliente()
+/*Cliente::~Cliente()
 {
 	
-}
+}*/
