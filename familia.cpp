@@ -22,6 +22,14 @@ void Familia::mostrarIntegrantes()
 		cout << integrante + ", ";
 	}
 }
+
+void Familia::pagarMontoFinal(){
+	
+}			
+void Familia::aplicarDescuento(double& precio){
+	cout<<precio;
+}
+
 Familia::~Familia()
 {
 	

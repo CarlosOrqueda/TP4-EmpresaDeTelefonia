@@ -7,10 +7,10 @@ using namespace std;
 class Abonable
 {
 	protected:
-		double precioBase;
+		double precioBase = 323.44;
 	public:
+		virtual void aplicarDescuento(double& precio) = 0;
 		virtual void pagarMontoFinal() = 0;
-		virtual void aplicarDescuento(double precio);
 };
 
 #endif

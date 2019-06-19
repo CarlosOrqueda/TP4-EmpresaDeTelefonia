@@ -2,6 +2,7 @@
 #define INDIVIDUO
 
 #include "cliente.hpp"
+#include "abonable.hpp"
 
 class Individuo: public Cliente
 {
@@ -9,9 +10,12 @@ class Individuo: public Cliente
 			string nombre;
 	public:
 			Individuo();
-			Individuo(double _precio,double _descuento,int _numero, string _nombre);
+			Individuo(string _nombre);
+			Individuo(string _nombre,int numero);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
+			void pagarMontoFinal();
+			void aplicarDescuento(double& precio);
 			
 			~Individuo();
 };

@@ -1,8 +1,9 @@
 #include <iostream>
 using namespace std;
+#include "individuo.hpp"
+#include "familia.hpp"
 
 int main()
 {
-	/* code */
 	return 0;
 }
