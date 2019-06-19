@@ -9,8 +9,8 @@ class Abonable
 	protected:
 		double precioBase = 323.44;
 	public:
-		virtual void aplicarDescuento(double& precio) = 0;
-		virtual void pagarMontoFinal() = 0;
+		double obtenerPrecioBase();
+		virtual double obtenerPrecioFinal() = 0;
 };
 
 #endif

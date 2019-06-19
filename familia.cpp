@@ -2,33 +2,31 @@
 
 Familia::Familia():Cliente()
 {
-	integrantes[10] = {""};	
+	integrantes[10] = {""};
 	tope = 0;
-
 }
-void Familia::agregarIntegrante(string _nombre)
+void Familia::agregarIntegrante(string _nombre[],int _tam)
 {
-	if(tope < 10){
-		integrantes[tope] = _nombre;
+	int recorrer = 0;
+	while((tope < 10)&&(recorrer < _tam))
+	{
+		integrantes[tope] = _nombre[recorrer];
 		tope++;
-	}else {
-		cout<< "Maximo de integrantes por familia, superado\n";
+		recorrer++;
 	}
-	
 }
 void Familia::mostrarIntegrantes()
 {
-	for(string integrante: integrantes){
+	for(string integrante: integrantes)
+	{
 		cout << integrante + ", ";
 	}
 }
 
-void Familia::pagarMontoFinal(){
-	
-}			
-void Familia::aplicarDescuento(double& precio){
-	cout<<precio;
-}
+double Familia::obtenerPrecioFinal()
+{
+	return precioBase-(precioBase*0.35);
+};
 
 Familia::~Familia()
 {
