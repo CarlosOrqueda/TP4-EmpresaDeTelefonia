@@ -53,6 +53,7 @@ Nodo<Cliente>* Abb::buscar(Cliente *dato) {
         buscar(dato);
     }
     raiz = raizAux;
+    return NULL;
 }
 
 void Abb::borrar(Cliente *dato) {
