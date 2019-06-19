@@ -9,7 +9,7 @@ class Individuo: public Cliente
 			string nombre;
 	public:
 			Individuo();
-			
+			Individuo(string _nombre);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
 			

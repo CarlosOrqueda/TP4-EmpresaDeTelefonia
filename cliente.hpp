@@ -1,8 +1,7 @@
 #ifndef CLIENTE
 #define CLIENTE
-#include <iostream>
-#include <string>
-using namespace std;
+
+#include "precio.hpp"
 
 class Cliente
 {
@@ -11,12 +10,9 @@ class Cliente
 			int numero;
 	public:
 			Cliente();
-			
+			Cliente(int _numero);
 			void asignarNumero(int _numero);
 			int obtenerNumero();
-			
-			void asignarDescuento(double _descuento);
-			double obtenerDescuento();
 			
 			~Cliente();
 };
