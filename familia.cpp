@@ -4,20 +4,16 @@ Familia::Familia():Cliente()
 {
 	integrantes[10] = {""};
 	tope = 0;
-
 }
-void Familia::agregarIntegrante(string _nombre)
+void Familia::agregarIntegrante(string _nombre[],int _tam)
 {
-	if(tope < 10)
+	int recorrer = 0;
+	while((tope < 10)&&(recorrer < _tam))
 	{
-		integrantes[tope] = _nombre;
+		integrantes[tope] = _nombre[recorrer];
 		tope++;
+		recorrer++;
 	}
-	else
-	{
-		cout<< "Maximo de integrantes por familia, superado\n";
-	}
-	
 }
 void Familia::mostrarIntegrantes()
 {
