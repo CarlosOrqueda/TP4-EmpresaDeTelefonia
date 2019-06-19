@@ -9,7 +9,9 @@ class Nodo{
 		
 		private:
 		DatoNodo* data;
-    	Nodo<DatoNodo>* izquierda, derecha, padre;
+    	Nodo<DatoNodo>* izquierda;
+		Nodo<DatoNodo>* derecha;
+		Nodo<DatoNodo>* padre;
 
 		public:
 
@@ -19,7 +21,7 @@ class Nodo{
 			asignarDerecha(derecha);
 			asignarPadre(padre);
 		}
-		DatoNodo obtenerData(){
+		DatoNodo* obtenerData(){
 			return data;
 		}
 		Nodo<DatoNodo>* obtenerizquierda(){

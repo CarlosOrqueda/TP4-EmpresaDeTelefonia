@@ -26,7 +26,7 @@ void Abb::insertar(Cliente *dato) {
         Nodo<Cliente>* nuevoCliente = new Nodo<Cliente>(dato);
         raiz = nuevoCliente;
     }else {
-        if (dato->obtenerNumero() < raizAux->obtenerData().obtenerNumero()){
+        if (dato->obtenerNumero() < raizAux->obtenerData()->obtenerNumero()){
             raiz->asignarPadre(raiz);
             raiz = raiz->obtenerizquierda();
         }else {
@@ -42,10 +42,10 @@ Nodo<Cliente>* Abb::buscar(Cliente *dato) {
     Nodo<Cliente>* raizAux = raiz;
     if(estaVacio())
         return NULL;
-    else if(dato->obtenerNumero() == raiz->obtenerData().obtenerNumero())
+    else if(dato->obtenerNumero() == raiz->obtenerData()->obtenerNumero()){
         return raiz;
-    else{
-        if(dato->obtenerNumero()<raizAux->obtenerData().obtenerNumero()){
+    }else{
+        if(dato->obtenerNumero()<raizAux->obtenerData()->obtenerNumero()){
             raiz = raiz->obtenerizquierda();
         } else{
             raiz = raiz->obtenerDerecha();
@@ -66,7 +66,7 @@ void Abb::borrar(Cliente *dato) {
 void Abb::eliminarNodo(Nodo<Cliente> *nodoBuscado) {
     if(nodoBuscado->obtenerizquierda() && nodoBuscado->obtenerDerecha()){
         Nodo<Cliente>* menor = minimo(nodoBuscado->obtenerDerecha());
-        nodoBuscado->obtenerData().asignarNumero(menor->obtenerData().obtenerNumero());
+        nodoBuscado->obtenerData()->asignarNumero(menor->obtenerData()->obtenerNumero());
         eliminarNodo(menor); //No estaria seguro que conecte con el padre
     }
     else if(nodoBuscado->obtenerizquierda()){
@@ -84,9 +84,9 @@ void Abb::eliminarNodo(Nodo<Cliente> *nodoBuscado) {
 
 void Abb::reemplazar(Nodo<Cliente>* nodo, Nodo<Cliente>* nuevoNodo){
     if (nodo->obtenerPadre()){
-        if(nodo->obtenerData().obtenerNumero()== nodo->obtenerPadre()->obtenerData().obtenerNumero()){
+        if(nodo->obtenerData()->obtenerNumero()== nodo->obtenerPadre()->obtenerData()->obtenerNumero()){
             nodo->obtenerPadre()->asignarizquierda(nuevoNodo);
-        }else if(nodo->obtenerData().obtenerNumero() == nodo->obtenerPadre()->obtenerData().obtenerNumero()){
+        }else if(nodo->obtenerData()->obtenerNumero() == nodo->obtenerPadre()->obtenerData()->obtenerNumero()){
             nodo->obtenerPadre()->asignarDerecha(nuevoNodo);
         }
     }
