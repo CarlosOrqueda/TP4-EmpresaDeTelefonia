@@ -1,61 +1,50 @@
-#ifndef ABB_HPP
-#define ABB_HPP
-#include <iostream>
-using namespace std;
-#include "Nodo.hpp"
+#ifndef ABB_H
+#define ABB_H
+
 #include "cliente.hpp"
 
+class Abb {
 
-class Abb{
+private:
+    Abb *izq;
+    Abb *der;
+    Cliente *dato;
 
-	private:
-	Nodo<Cliente>* raiz;
+public:
+    Abb();
 
-	public:
+    Abb(Cliente *dato);
 
-	//Constructor del Arbol binario de busqueda
-	Abb();
+    void insertar(Cliente *dato);
 
-	/*
-	* No puede insertar la misma clave.
-	*/
-	void insertar(Cliente* dato);
+    void mostrarArbol(int cont = 0);
 
-	/*
-	* Elimina el dato cuya clave coincide con la enviada.
-	*/
-	void borrar(Cliente* dato);
+    bool existe(Cliente *dato);
 
-	void eliminarNodo(Nodo<Cliente>* nodoBuscado);
+    void eliminar(int numero);
 
-	Nodo<Cliente>* minimo(Nodo<Cliente>* menor);
+    void eliminarNodo();
 
-    void reemplazar(Nodo<Cliente>* nodo, Nodo<Cliente>* nuevoNodo);
+    Cliente* minimo();
 
-    void destruirNodo(Nodo<Cliente>* nodo);
+    void reemplazar(Cliente* nuevoDato);
 
-	/*
-	* Busca un dato en el arbol.
-	* El parametro dato se utiliza para comparar con los otros datas del arbol.
-	* Debe estar inicializado como para poder utilizar la función de comparación.
-	* Devuelve el dato encontrado o NULL si no lo encuentra.
-	*/
-	Nodo<Cliente>* buscar(Cliente* dato);
+    Abb* buscarPadre(Cliente* dato);
 
-	/*
-	* Determina si el árbol está vacío. 
-	* Devuelve true si lo está, false en caso contrario.
-	*/
-	bool estaVacio();
+    Abb *getIzq() const;
 
-	void insertarRaiz(Nodo<Cliente>* nuevaRaiz);
+    void setIzq(Abb *izq);
 
-	Nodo<Cliente>* obtenerRaiz();
+    Abb *getDer() const;
 
-	/*
-	* Destruye el arbol liberando la memoria reservada por este y todos sus nodos y hojas.
-	* Adicionalmente invoca el destructor con cada dato presente en el arbol.
-	*/
-	~Abb();
+    void setDer(Abb *der);
+
+    Cliente *getDato() const;
+
+    void setDato(Cliente *dato);
+
+    void preOrdenEliminar();
+
+    ~Abb();
 };
-#endif
+#endif //ABB_H
