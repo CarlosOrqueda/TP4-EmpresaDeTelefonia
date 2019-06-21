@@ -14,7 +14,7 @@ class Cliente : protected Abonable
 			void definirPrecioFinal();
 			int obtenerNumero();
 			
-			~Cliente();
+			virtual ~Cliente();
 };
 
 #endif
