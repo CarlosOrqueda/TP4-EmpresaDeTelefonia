@@ -1,7 +1,3 @@
-//
-// Created by carlo on 17/06/2019.
-//
-
 #include <iostream>
 #include "Abb.hpp"
 
@@ -17,13 +13,15 @@ Abb::Abb() {
 
 Abb::Abb(Cliente* dato) {
     this->dato = dato;
+    der = NULL;
+    izq = NULL;
 }
 
 void Abb::insertar(Cliente* dato) {
     if(this->dato == NULL)
         this->dato = dato;
     else{
-        if(this->dato->obtenerNumero() < dato->obtenerNumero()){
+        if(dato->obtenerNumero() < this->dato->obtenerNumero()){
             if(izq==NULL) {
                 Abb *nuevoArbol = new Abb(dato);
                 izq = nuevoArbol;
@@ -40,10 +38,11 @@ void Abb::insertar(Cliente* dato) {
 }
 
 void Abb::mostrarArbol(int cont) {
-    if(dato == NULL)
+    if(this->dato == NULL)
         return;
     else{
-        der->mostrarArbol(cont + 1);
+        der->mostrarArbol(cont);
+        cont++;
         for(int i = 0 ; i < cont; i++){
             cout<<"   ";
         }

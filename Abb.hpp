@@ -9,13 +9,13 @@ private:
     Abb *izq;
     Abb *der;
     Cliente *dato;
-
+    //Buscar implementacion de arbol binario de busqueda xd
 public:
     Abb();
 
     Abb(Cliente *dato);
 
-    void insertar(Cliente *dato);
+    void insertar(Cliente* dato);
 
     void mostrarArbol(int cont = 0);
 

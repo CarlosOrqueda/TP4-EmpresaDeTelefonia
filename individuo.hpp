@@ -8,9 +8,8 @@ class Individuo: public Cliente
 	private:
 			string nombre;
 	public:
-			Individuo();
-			Individuo(string _nombre);
-			Individuo(string _nombre,int numero);
+			Individuo(int nuemero);
+			Individuo(int numero, string _nombre);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
 			
@@ -18,5 +17,5 @@ class Individuo: public Cliente
 			
 			~Individuo();
 };
-
+// 10% descuento
 #endif

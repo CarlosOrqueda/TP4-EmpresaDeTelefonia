@@ -9,7 +9,7 @@ class Familia: public Cliente
 			int tope;
 			string integrantes[10];
 	public:
-			Familia();
+			Familia(int numero);
 			void agregarIntegrante(string _nombre[],int _tam);
 			void mostrarIntegrantes();
 			
@@ -19,3 +19,4 @@ class Familia: public Cliente
 };
 
 #endif
+// 35% descuento

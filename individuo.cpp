@@ -1,16 +1,11 @@
 #include "individuo.hpp"
 
-Individuo::Individuo():Cliente()
+Individuo::Individuo(int numero):Cliente(numero)
 {
 	nombre = "";
 }
-Individuo::Individuo(string nombre, int numero)
-{
-	this->asignarNombre(nombre);
-	this->asignarNumero(numero);
 
-}
-Individuo::Individuo(string nombre)
+Individuo::Individuo(int numero,string nombre):Cliente(numero)
 {
 	asignarNombre(nombre);
 }

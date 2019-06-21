@@ -1,10 +1,9 @@
 #include "abonable.hpp"
 
-double Abonable::obtenerPrecioBase()
+double Abonable::obtenerPrecioFinal()
 {
-	return precioBase;
+	return precioFinal;
 }
-/*double Abonable::obtenerPrecioFinal()
-{
+Abonable::~Abonable(){
 	
-}*/
+}

@@ -3,7 +3,7 @@
 
 #include "abonable.hpp"
 
-class Cliente : public Abonable
+class Cliente : protected Abonable
 {
 
 	protected:
@@ -11,6 +11,7 @@ class Cliente : public Abonable
 	public:
             Cliente(int _numero);
 			void asignarNumero(int _numero);
+			void definirPrecioFinal();
 			int obtenerNumero();
 			
 			~Cliente();

@@ -8,9 +8,11 @@ class Abonable
 {
 	protected:
 		double precioBase = 323.44;
+		double precioFinal = 0;
 	public:
-		double obtenerPrecioBase();
-		virtual double obtenerPrecioFinal() = 0;
+		virtual void definirPrecioFinal() = 0;
+		double obtenerPrecioFinal();
+		virtual ~Abonable();
 };
 
 #endif

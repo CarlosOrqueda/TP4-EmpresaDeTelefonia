@@ -1,6 +1,6 @@
 #include "familia.hpp"
 
-Familia::Familia():Cliente()
+Familia::Familia(int numero) :Cliente(numero)
 {
 	integrantes[10] = {""};
 	tope = 0;
@@ -26,7 +26,7 @@ void Familia::mostrarIntegrantes()
 double Familia::obtenerPrecioFinal()
 {
 	return precioBase-(precioBase*0.35);
-};
+}
 
 Familia::~Familia()
 {
