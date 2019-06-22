@@ -83,83 +83,32 @@ bool Menu::obtenerSalir()
 
 void Menu::cargarArchivo()
 {
-	/*string nombreArchivo;
+	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
 	cin >> nombreArchivo;
 
-	ifstream listaTrabajadores(nombreArchivo);
-	if (!listaTrabajadores.is_open())
+	ifstream listaClientes(nombreArchivo);
+	if (!listaClientes.is_open())
 	{
 		cout << "ERROR Archivo inexistente" << endl;
 	}
 	else
 	{
-		int legajoInt = 0;
-		double sueldoDbl = 0;
-		int llegadasTardesInt, ausenciasInt, diasTrabajadosInt, hsCatedraInt, hsDescontadasInt;
-
-		string tipo, legajo, apellidoNombre, sueldo;
-		string llegadasTardes, ausencias;
-		string diasTrabajados;
-		string hsCatedra, hsDescontadas;
-
-		while (listaTrabajadores.good())
+		int i = 0;
+		int numero = 0;
+		string nombre[5];
+		
+		while (listaClientes.good())
 		{
-			getline(listaTrabajadores, tipo, '\t');
-			if (tipo == "E")
+			getline(listaClientes,numero,',');
+			cout<< numero;
+			while(getline(listaClientes,nombre[i],','))
 			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, llegadasTardes, '\t');
-				getline(listaTrabajadores, ausencias, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
-				{
-					sueldoDbl = stod(sueldo);
-					llegadasTardesInt = stoi(llegadasTardes);
-					ausenciasInt = stoi(ausencias);
-					Empleado *empleadoNuevo = new Empleado(legajoInt, apellidoNombre, sueldoDbl, llegadasTardesInt, ausenciasInt);
-					listaTr->agregar(empleadoNuevo);
-				}
-			}
-			else if (tipo == "J")
-			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, diasTrabajados, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
-				{
-					sueldoDbl = stod(sueldo);
-					diasTrabajadosInt = stoi(diasTrabajados);
-					Jornalero *jornaleroNuevo = new Jornalero(legajoInt, apellidoNombre, sueldoDbl, diasTrabajadosInt);
-					listaTr->agregar(jornaleroNuevo);
-				}
-			}
-			else if (tipo == "C")
-			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, hsCatedra, '\t');
-				getline(listaTrabajadores, hsDescontadas, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
-				{
-					sueldoDbl = stod(sueldo);
-					hsCatedraInt = stoi(hsCatedra);
-					hsDescontadasInt = stoi(hsDescontadas);
-					Consultor *consultorNuevo = new Consultor(legajoInt, apellidoNombre, sueldoDbl, hsCatedraInt, hsDescontadasInt);
-					listaTr->agregar(consultorNuevo);
-				}
+				cout<<" *"<<nombre[i]<<endl;
+				i++;
 			}
 		}
-	}*/
+	}
 }
 
 void Menu::darAlta()
