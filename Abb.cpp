@@ -1,171 +1,106 @@
 #include <iostream>
 #include "Abb.hpp"
 
+
 using namespace std;
 
-
 Abb::Abb() {
-    izq = NULL;
-    der = NULL;
-    dato = NULL;
-
+    raiz = NULL;
 }
 
-Abb::Abb(Cliente* dato) {
-    this->dato = dato;
-    der = NULL;
-    izq = NULL;
-}
-
-void Abb::insertar(Cliente* dato) {
-    if(this->dato == NULL)
-        this->dato = dato;
-    else{
-        if(dato->obtenerNumero() < this->dato->obtenerNumero()){
-            if(izq==NULL) {
-                Abb *nuevoArbol = new Abb(dato);
-                izq = nuevoArbol;
-            } else
-                izq->insertar(dato);
-        } else{
-            if(der == NULL){
-                Abb* nuevoArbol = new Abb(dato);
-                der = nuevoArbol;
+void Abb::insertar(Nodo* arbol,Cliente* nuevoCliente) {
+    if(!arbol) {
+        arbol = new Nodo(nuevoCliente);
+        raiz = arbol;
+    }else{
+        if(nuevoCliente->obtenerNumero() < raiz->obtenerData()->obtenerNumero()){
+            if(!arbol->obtenerIzquierda()) {
+                Nodo *nuevoArbol = new Nodo(nuevoCliente);
+                arbol->asignarIzquierda(nuevoArbol);
             }else
-                der->insertar(dato);
+                insertar(arbol->obtenerIzquierda(),nuevoCliente);
+        }else{
+            if(!arbol->obtenerDerecha()){
+                Nodo* nuevoArbol = new Nodo(nuevoCliente);
+                arbol->asignarDerecha(nuevoArbol);
+            }else
+                insertar(arbol->obtenerDerecha(),nuevoCliente);
         }
     }
 }
 
-void Abb::mostrarArbol(int cont) {
-    if(this->dato == NULL)
-        return;
-    else{
-        der->mostrarArbol(cont);
-        cont++;
-        for(int i = 0 ; i < cont; i++){
-            cout<<"   ";
-        }
-        cout<<dato->obtenerNumero()<<endl;
-        der->mostrarArbol(cont+1);
-    }
-}
-
-void Abb::eliminar(int numero) {
-    if(this->dato == NULL)
-        return;
-    else if(numero < this->dato->obtenerNumero())
-        izq->eliminar(numero);
-    else if(numero > this->dato->obtenerNumero())
-        der->eliminar(numero);
+int Abb::obtenerAltura(Nodo *arbol) {
+    if(!arbol)
+        return 0;
     else
-        eliminarNodo();
+        return 1 + max(obtenerAltura(arbol->obtenerIzquierda()),obtenerAltura(arbol->obtenerDerecha()));
 }
 
-void Abb::eliminarNodo() {
-    if(izq && der) {
-        Cliente *menor = der->minimo();
-        setDato(menor);
-        Abb* padre = buscarPadre(menor);
-        if(padre->der->dato->obtenerNumero() == menor->obtenerNumero())
-            padre->der->eliminarNodo();
-        else
-            padre->izq->eliminarNodo();
-    }else if(izq)
-        izq->reemplazar(izq->dato);
-    else if(der)
-        der->reemplazar(der->dato);
-    else{
-        reemplazar(NULL);
-        delete dato;
-    }
-
-}
-
-void Abb::reemplazar(Cliente* nuevoDato) {
-    if(buscarPadre(dato)){
-        Abb* padre = buscarPadre(dato);
-        if(dato->obtenerNumero() == padre->izq->dato->obtenerNumero())
-            padre->izq->setDato(nuevoDato);
-        else if(dato->obtenerNumero() == padre->der->dato->obtenerNumero())
-            padre->der->setDato(nuevoDato);
-    }
-    delete(dato);
-    //FALTA CASO LIMITE DE RAIZ QUE NO TIENE PADRE
-
-
-
-}
-
-Abb* Abb::buscarPadre(Cliente *dato) {
-    if(this->dato == NULL)
-        return NULL;
-    else{
-        if(dato->obtenerNumero() == der->dato->obtenerNumero() || dato->obtenerNumero() == izq->dato->obtenerNumero())
-            return this;
-        else{
-            if(dato->obtenerNumero() < this->dato->obtenerNumero())
-                return izq->buscarPadre(dato);
-            else
-                return der->buscarPadre(dato);
-        }
-    }
-}
-
-Cliente* Abb::minimo() {
-    if(dato == NULL)
-        return  NULL;
-    if(izq)
-        return izq->minimo();
-    else
-        return dato;
-}
-
-bool Abb::existe(Cliente *dato) {
-    if(this->dato == NULL)
+bool Abb::balanceado(Nodo *arbol) {
+    if(!arbol)
         return false;
-    else if(this->dato->obtenerNumero() == dato->obtenerNumero())
-        return true;
-    else if(dato->obtenerNumero() < this->dato->obtenerNumero())
-        return this->izq->existe(dato);
-    else
-        return this->der->existe(dato);
+    int alturaIzquierda = obtenerAltura(arbol->obtenerIzquierda());
+    int alturaDerecha = obtenerAltura(arbol->obtenerDerecha());
+    if (abs(alturaIzquierda - alturaDerecha)>1)
+        return false;
+    return true;
 }
 
-void Abb::preOrdenEliminar() {
-    if(dato==NULL)
-        return;
-    else{
-        delete dato;
-        izq->preOrdenEliminar();
-        der->preOrdenEliminar();
+Nodo* Abb::obtenerNodoMaximo() {
+    if(!raiz) {
+        cout << "Arbol vacio" << endl;
     }
+    Nodo* arbol = raiz;
+    while(arbol->obtenerDerecha())
+        arbol = arbol->obtenerDerecha();
+    return arbol;
+}
+
+Nodo* Abb::obtenerNodoMinimo() {
+    if(!raiz) {
+        cout << "Arbol vacio" << endl;
+    }
+    Nodo* arbol = raiz;
+    while(arbol->obtenerIzquierda())
+        arbol = arbol->obtenerIzquierda();
+    return arbol;
+}
+
+void Abb::eliminarArbol(Nodo* arbol) {
+    if(!arbol)
+        return;
+    Nodo* arbolBase = arbol;
+    Nodo* arbolIzquierdo = arbol->obtenerIzquierda();
+    Nodo* arbolDerecho = arbol->obtenerDerecha();
+    delete(arbolBase);
+    eliminarArbol(arbolIzquierdo);
+    eliminarArbol(arbolDerecho);
+}
+
+void  Abb::inOrder(Nodo *arbol) {
+    if(!arbol)
+        return;
+    inOrder(arbol->obtenerIzquierda());
+    cout<<arbol->obtenerData()->obtenerNumero()<<endl;
+    inOrder(arbol->obtenerDerecha());
+}
+
+void Abb::preOrder(Nodo *arbol) {
+    if(!arbol)
+        return;
+    cout<<arbol->obtenerData()->obtenerNumero()<<endl;
+    postOrder(arbol->obtenerIzquierda());
+    postOrder(arbol->obtenerDerecha());
+}
+
+void Abb::postOrder(Nodo *arbol) {
+    if(!arbol)
+        return;
+    postOrder(arbol->obtenerIzquierda());
+    postOrder(arbol->obtenerDerecha());
+    cout<<arbol->obtenerData()->obtenerNumero()<<endl;
 }
 
 Abb::~Abb() {
-    preOrdenEliminar();
-}
-
-Abb *Abb::getIzq() const {
-    return izq;
-}
-
-void Abb::setIzq(Abb *izq) {
-    Abb::izq = izq;
-}
-
-Abb *Abb::getDer() const {
-    return der;
-}
-
-void Abb::setDer(Abb *der) {
-    Abb::der = der;
-}
-
-Cliente *Abb::getDato() const {
-    return dato;
-}
-
-void Abb::setDato(Cliente *dato) {
-    Abb::dato = dato;
+    eliminarArbol();
 }
