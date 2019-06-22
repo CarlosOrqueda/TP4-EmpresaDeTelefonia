@@ -2,6 +2,7 @@
 #define MENU_HPP
 
 #include <iostream>
+#include <istream>
 #include <fstream>
 #include <string>
 using namespace std;

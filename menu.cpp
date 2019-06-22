@@ -32,7 +32,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 	{
 		case 1:
 		{
-			//cargarArchivo();
+			cargarArchivo();
 			break;
 		}
 		case 2:
@@ -94,18 +94,61 @@ void Menu::cargarArchivo()
 	}
 	else
 	{
+		string numero;
+		
 		int i = 0;
-		int numero = 0;
-		string nombre[5];
+		string listaNombres;
+		int posiciones[5];
+		string nombre;//INDV
+		string nombres[5];//FLIA
 		
 		while (listaClientes.good())
 		{
-			getline(listaClientes,numero,',');
-			cout<< numero;
-			while(getline(listaClientes,nombre[i],','))
+			i = 0;
+			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
 			{
-				cout<<" *"<<nombre[i]<<endl;
-				i++;
+				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
+				{
+					i++;
+					string busco = ",";
+					size_t pos = listaNombres.find(busco);
+					while( pos != std::string::npos) //OBTENER POSICIONES
+					{
+						posiciones[i] = pos;
+						pos = listaNombres.find(busco, pos + busco.size());
+						i++;
+					}
+					if(i == 1) //INDIVIDUO
+					{
+						nombre = listaNombres.substr(0,posiciones[1]);
+					}
+					else //FAMILIA
+					{
+						for(int j = 0; j < i; j++) //OBTENER SUBSTRINGS
+						{
+							if(j == 0)
+								nombres[j] = listaNombres.substr(0,posiciones[j+1]); //Primero
+							else
+							{
+								if(j == i-1)
+									nombres[j] = listaNombres.substr(posiciones[j]+1); //Ultimo
+								else
+									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1) );
+							}
+						}
+					}
+				}
+				cout<<numero<<": ";
+				if(i == 1)
+						cout<<nombre<<" ";
+				else
+					for(int j = 0; j < i; j++)
+						cout<<nombres[j]<<" ";
+				cout<<endl;
+				
+				/*Cliente* _cliente = new Cliente;
+				_cliente()
+				arbol.insertar(cliente*);*/
 			}
 		}
 	}
