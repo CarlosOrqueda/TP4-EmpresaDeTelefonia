@@ -2,51 +2,42 @@
 #define NODO_HPP
 
 #include <iostream>
+#include "cliente.hpp"
+
 using namespace std;
 
-template <typename DatoNodo>
+
 class Nodo{
 		
 		private:
-		DatoNodo* data;
-    	Nodo<DatoNodo>* izquierda;
-		Nodo<DatoNodo>* derecha;
-		Nodo<DatoNodo>* padre;
+		Cliente* data;
+    	Nodo* izquierda;
+		Nodo* derecha;
 
 		public:
 
-		Nodo(DatoNodo* data, Nodo<DatoNodo>* izquierda = NULL, Nodo<DatoNodo>* derecha = NULL, Nodo<DatoNodo>* padre = NULL){
+		Nodo(Cliente* data, Nodo* izquierda = NULL, Nodo* derecha = NULL){
 			asignarData(data);
-			asignarizquierda(izquierda);
+			asignarIzquierda(izquierda);
 			asignarDerecha(derecha);
-			asignarPadre(padre);
 		}
-		DatoNodo* obtenerData(){
+		Cliente* obtenerData(){
 			return data;
 		}
-		Nodo<DatoNodo>* obtenerizquierda(){
+		Nodo* obtenerIzquierda(){
 			return izquierda;
 		}
-		Nodo<DatoNodo>* obtenerDerecha(){
+		Nodo* obtenerDerecha(){
 			return derecha;
 		}
-
-		Nodo<DatoNodo>* obtenerPadre(){
-            return padre;
-        }
-
-		void asignarData(DatoNodo* data){
+		void asignarData(Cliente* data){
 			Nodo::data = data;
 		}
-		void asignarizquierda(Nodo<DatoNodo>* izquierda){
+		void asignarIzquierda(Nodo* izquierda){
 			Nodo::izquierda = izquierda;
 		}
-		void asignarDerecha(Nodo<DatoNodo>* derecha){
+		void asignarDerecha(Nodo* derecha){
 			Nodo::derecha = derecha;
-		}
-
-        void asignarPadre(Nodo<DatoNodo>* padre){
-            Nodo::padre = padre;
 		}
 };
 #endif

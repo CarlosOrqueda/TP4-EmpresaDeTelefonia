@@ -2,48 +2,40 @@
 #define ABB_H
 
 #include "cliente.hpp"
+#include "Nodo.hpp"
 
 class Abb {
 
 private:
-    Abb *izq;
-    Abb *der;
-    Cliente *dato;
+    Nodo* raiz;
     //Buscar implementacion de arbol binario de busqueda xd
+    void insertar(Nodo* arbol, Cliente* nuevoCliente);
+    int obtenerAltura(Nodo* arbol);
+    bool balanceado(Nodo* arbol);
+    void eliminarArbol(Nodo* arbol);
+    void inOrder(Nodo* arbol);
+    void preOrder(Nodo* arbol);
+    void postOrder(Nodo* arbol);
 public:
     Abb();
 
-    Abb(Cliente *dato);
+    void insertar(Cliente* nuevoCliente){insertar(raiz,nuevoCliente);}
 
-    void insertar(Cliente* dato);
+    int obtenerAltura(){return obtenerAltura(raiz);}
 
-    void mostrarArbol(int cont = 0);
+    bool balanceado(){return balanceado(raiz);}
 
-    bool existe(Cliente *dato);
+    Nodo* obtenerNodoMaximo();
 
-    void eliminar(int numero);
+    Nodo* obtenerNodoMinimo();
 
-    void eliminarNodo();
+    void eliminarArbol(){eliminarArbol(raiz);}
 
-    Cliente* minimo();
+    void inOrder(){inOrder(raiz);}
 
-    void reemplazar(Cliente* nuevoDato);
+    void preOrder(){preOrder(raiz);}
 
-    Abb* buscarPadre(Cliente* dato);
-
-    Abb *getIzq() const;
-
-    void setIzq(Abb *izq);
-
-    Abb *getDer() const;
-
-    void setDer(Abb *der);
-
-    Cliente *getDato() const;
-
-    void setDato(Cliente *dato);
-
-    void preOrdenEliminar();
+    void postOrder(){postOrder(raiz);}
 
     ~Abb();
 };
