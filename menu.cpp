@@ -37,7 +37,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 		}
 		case 2:
 		{
-			//darAlta();
+			darAlta(_arbol);
 			break;
 		}
 		case 3:
@@ -138,14 +138,6 @@ void Menu::cargarArchivo(Abb* _arbol)
 						}
 					}
 				}
-				cout<<numero<<": ";
-				if(i == 1)
-						cout<<nombre<<" ";
-				else
-					for(int j = 0; j < i; j++)
-						cout<<nombres[j]<<" ";
-				cout<<endl;
-				
 				if(i == 1)
 				{
 					Individuo* _individuo = new Individuo(numero,nombre);
@@ -163,9 +155,65 @@ void Menu::cargarArchivo(Abb* _arbol)
 
 void Menu::darAlta(Abb* _arbol)
 {
+	string legajo;
+	cout<<"Ingrese un legajo: ";
+	cin>>legajo;
+	
+	int tipo = 0;
+	cout<<"Que Tipo de Cliente Desea Ingresar?"<<endl;
+	while((tipo != 1)&&(tipo != 2))
+	{
+		cout<<"Individuo[1] - Familia[2]: "<<endl;
+		cin>>tipo;
+	}
+	
+	string ceros = "";
+	int cant = 8-(legajo.size());
+	for(int i = 0; i<cant; i++)
+	{
+		ceros = ceros+"0";
+	}
+	
+	string numTel = ceros+legajo;
+	
+	if(tipo == 1)
+	{
+		string nombre;
+		cout<<"Ingrese APELLIDO_NOMBRE: ";
+		cin>>nombre;
+		Individuo* _individuo = new Individuo(numTel,nombre);
+		_arbol->insertar(_individuo);
+	}
+	else if(tipo == 2)
+	{
+		bool valido = false;
+		int cant = 0;
+		while(!valido)
+		{
+			cout<<"Ingrese la cantidad de Integrantes(MIN 1/MAX 10): ";
+			cin>>cant;
+			valido = ((cant>0)&&(cant<=10));
+		}
+		string famNombres[10];
+		
+		for(int i = 0; i<cant; i++)
+		{
+			cout<<"Ingrese APELLIDO_NOMBRE: ";
+			cin>>famNombres[i];
+		}
+		Familia* _familia = new Familia(numTel,famNombres,cant);
+		_arbol->insertar(_familia);
+	}
 }
 void Menu::listarClientes(Abb* _arbol)
 {
+	/*cout<<numero<<": ";
+	if(i == 1)
+		cout<<nombre<<" ";
+	else
+		for(int j = 0; j < i; j++)
+			cout<<nombres[j]<<" ";
+	cout<<endl;*/
 }
 void Menu::buscarCliente(Abb* _arbol)
 {
