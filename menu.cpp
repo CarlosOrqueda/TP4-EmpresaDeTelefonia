@@ -32,7 +32,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 	{
 		case 1:
 		{
-			//cargarArchivo();
+			cargarArchivo(_arbol);
 			break;
 		}
 		case 2:
@@ -81,93 +81,92 @@ bool Menu::obtenerSalir()
 
 
 
-void Menu::cargarArchivo()
+void Menu::cargarArchivo(Abb* _arbol)
 {
-	/*string nombreArchivo;
+	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
 	cin >> nombreArchivo;
 
-	ifstream listaTrabajadores(nombreArchivo);
-	if (!listaTrabajadores.is_open())
+	ifstream listaClientes(nombreArchivo);
+	if (!listaClientes.is_open())
 	{
 		cout << "ERROR Archivo inexistente" << endl;
 	}
 	else
 	{
-		int legajoInt = 0;
-		double sueldoDbl = 0;
-		int llegadasTardesInt, ausenciasInt, diasTrabajadosInt, hsCatedraInt, hsDescontadasInt;
-
-		string tipo, legajo, apellidoNombre, sueldo;
-		string llegadasTardes, ausencias;
-		string diasTrabajados;
-		string hsCatedra, hsDescontadas;
-
-		while (listaTrabajadores.good())
+		string numero;
+		
+		int i = 0;
+		string listaNombres;
+		int posiciones[5];
+		string nombre;//INDV
+		string nombres[5];//FLIA
+		
+		while (listaClientes.good())
 		{
-			getline(listaTrabajadores, tipo, '\t');
-			if (tipo == "E")
+			i = 0;
+			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
 			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, llegadasTardes, '\t');
-				getline(listaTrabajadores, ausencias, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
+				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
 				{
-					sueldoDbl = stod(sueldo);
-					llegadasTardesInt = stoi(llegadasTardes);
-					ausenciasInt = stoi(ausencias);
-					Empleado *empleadoNuevo = new Empleado(legajoInt, apellidoNombre, sueldoDbl, llegadasTardesInt, ausenciasInt);
-					listaTr->agregar(empleadoNuevo);
+					i++;
+					string busco = ",";
+					size_t pos = listaNombres.find(busco);
+					while( pos != std::string::npos) //OBTENER POSICIONES
+					{
+						posiciones[i] = pos;
+						pos = listaNombres.find(busco, pos + busco.size());
+						i++;
+					}
+					if(i == 1) //INDIVIDUO
+					{
+						nombre = listaNombres.substr(0,posiciones[1]);
+					}
+					else //FAMILIA
+					{
+						for(int j = 0; j < i; j++) //OBTENER SUBSTRINGS
+						{
+							if(j == 0)
+								nombres[j] = listaNombres.substr(0,posiciones[j+1]); //Primero
+							else
+							{
+								if(j == i-1)
+									nombres[j] = listaNombres.substr(posiciones[j]+1); //Ultimo
+								else
+									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1) );
+							}
+						}
+					}
 				}
-			}
-			else if (tipo == "J")
-			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, diasTrabajados, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
+				cout<<numero<<": ";
+				if(i == 1)
+						cout<<nombre<<" ";
+				else
+					for(int j = 0; j < i; j++)
+						cout<<nombres[j]<<" ";
+				cout<<endl;
+				
+				if(i == 1)
 				{
-					sueldoDbl = stod(sueldo);
-					diasTrabajadosInt = stoi(diasTrabajados);
-					Jornalero *jornaleroNuevo = new Jornalero(legajoInt, apellidoNombre, sueldoDbl, diasTrabajadosInt);
-					listaTr->agregar(jornaleroNuevo);
+					Individuo* _individuo = new Individuo(numero,nombre);
+					_arbol->insertar(_individuo);
 				}
-			}
-			else if (tipo == "C")
-			{
-				getline(listaTrabajadores, legajo, '\t');
-				getline(listaTrabajadores, apellidoNombre, '\t');
-				getline(listaTrabajadores, sueldo, '\t');
-				getline(listaTrabajadores, hsCatedra, '\t');
-				getline(listaTrabajadores, hsDescontadas, '\n');
-
-				legajoInt = stoi(legajo);
-				if (existeLegajo(listaTr, legajoInt) == -1)
+				else
 				{
-					sueldoDbl = stod(sueldo);
-					hsCatedraInt = stoi(hsCatedra);
-					hsDescontadasInt = stoi(hsDescontadas);
-					Consultor *consultorNuevo = new Consultor(legajoInt, apellidoNombre, sueldoDbl, hsCatedraInt, hsDescontadasInt);
-					listaTr->agregar(consultorNuevo);
+					Familia* _familia = new Familia(numero,nombres,i);
+					_arbol->insertar(_familia);
 				}
 			}
 		}
-	}*/
+	}
 }
 
-void Menu::darAlta()
+void Menu::darAlta(Abb* _arbol)
 {
 }
-void Menu::listarClientes()
+void Menu::listarClientes(Abb* _arbol)
 {
 }
-void Menu::buscarCliente()
+void Menu::buscarCliente(Abb* _arbol)
 {
 }

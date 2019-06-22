@@ -1,15 +1,15 @@
 #include "cliente.hpp"
 
-Cliente::Cliente(int _numero) {
+Cliente::Cliente(string _numero) {
     numeroTelefono = _numero;
 }
 
 
-void Cliente::asignarNumero(int _numero)
+void Cliente::asignarNumero(string _numero)
 {
 	numeroTelefono = _numero;
 }
-int Cliente::obtenerNumero()
+string Cliente::obtenerNumero()
 {
 	return numeroTelefono;
 }

@@ -1,9 +1,16 @@
 #include "familia.hpp"
 
-Familia::Familia(int numero) :Cliente(numero)
+Familia::Familia(string numero) :Cliente(numero)
 {
 	integrantes[10] = {""};
 	tope = 0;
+}
+Familia::Familia(string numero,string _nombres[],int _tam) :Cliente(numero)
+{
+	for(int i = 0; i < _tam; i++)
+	{
+		integrantes[i] = _nombres[i];
+	}
 }
 void Familia::agregarIntegrante(string _nombre[],int _tam)
 {
