@@ -32,7 +32,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 	{
 		case 1:
 		{
-			cargarArchivo();
+			cargarArchivo(_arbol);
 			break;
 		}
 		case 2:
@@ -81,7 +81,7 @@ bool Menu::obtenerSalir()
 
 
 
-void Menu::cargarArchivo()
+void Menu::cargarArchivo(Abb* _arbol)
 {
 	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
@@ -146,20 +146,27 @@ void Menu::cargarArchivo()
 						cout<<nombres[j]<<" ";
 				cout<<endl;
 				
-				/*Cliente* _cliente = new Cliente;
-				_cliente()
-				arbol.insertar(cliente*);*/
+				if(i == 1)
+				{
+					Individuo* _individuo = new Individuo(numero,nombre);
+					_arbol->insertar(_individuo);
+				}
+				else
+				{
+					Familia* _familia = new Familia(numero,nombres,i);
+					_arbol->insertar(_familia);
+				}
 			}
 		}
 	}
 }
 
-void Menu::darAlta()
+void Menu::darAlta(Abb* _arbol)
 {
 }
-void Menu::listarClientes()
+void Menu::listarClientes(Abb* _arbol)
 {
 }
-void Menu::buscarCliente()
+void Menu::buscarCliente(Abb* _arbol)
 {
 }

@@ -16,10 +16,10 @@ class Menu
 		int opcion;
 		bool salir;
 		
-		void cargarArchivo();
-		void darAlta();
-		void listarClientes();
-		void buscarCliente();
+		void cargarArchivo(Abb* _arbol);
+		void darAlta(Abb* _arbol);
+		void listarClientes(Abb* _arbol);
+		void buscarCliente(Abb* _arbol);
 
 	public:
 		void mostrarMenu();

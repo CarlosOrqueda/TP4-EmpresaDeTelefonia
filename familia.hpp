@@ -9,7 +9,8 @@ class Familia: public Cliente
 			int tope;
 			string integrantes[10];
 	public:
-			Familia(int numero);
+			Familia(string numero);
+			Familia(string numero,string _nombres[],int _tam);
 			void agregarIntegrante(string _nombre[],int _tam);
 			void mostrarIntegrantes();
 			

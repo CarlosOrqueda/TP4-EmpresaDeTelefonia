@@ -8,8 +8,8 @@ class Individuo: public Cliente
 	private:
 			string nombre;
 	public:
-			Individuo(int nuemero);
-			Individuo(int numero, string _nombre);
+			Individuo(string numero);
+			Individuo(string numero, string _nombre);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
 			

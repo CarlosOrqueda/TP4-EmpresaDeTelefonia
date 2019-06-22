@@ -7,12 +7,12 @@ class Cliente : protected Abonable
 {
 
 	protected:
-			int numeroTelefono;
+			string numeroTelefono;
 	public:
-            Cliente(int _numero);
-			void asignarNumero(int _numero);
+            Cliente(string _numero);
+			void asignarNumero(string _numero);
 			void definirPrecioFinal();
-			int obtenerNumero();
+			string obtenerNumero();
 			
 			virtual ~Cliente();
 };

@@ -1,11 +1,11 @@
 #include "individuo.hpp"
 
-Individuo::Individuo(int numero):Cliente(numero)
+Individuo::Individuo(string numero):Cliente(numero)
 {
 	nombre = "";
 }
 
-Individuo::Individuo(int numero,string nombre):Cliente(numero)
+Individuo::Individuo(string numero,string nombre):Cliente(numero)
 {
 	asignarNombre(nombre);
 }
