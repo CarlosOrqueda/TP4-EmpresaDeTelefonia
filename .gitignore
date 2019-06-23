@@ -4,3 +4,4 @@
 prueba
 CMakeList.txt
 camke-build-debug
+cmake-build-debug-mingw/

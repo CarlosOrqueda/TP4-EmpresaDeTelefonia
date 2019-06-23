@@ -15,7 +15,6 @@ private:
     void eliminarArbol(Nodo<Cliente>* _arbol);
     void inOrderMostrar(Nodo<Cliente>* _arbol);
     void inOrderBuscar(Nodo<Cliente>* _arbol, string _numero);
-    void inOrderEliminar(Nodo<Cliente>* _arbol, string _numero);
     void preOrder(Nodo<Cliente>* _arbol);
     void postOrder(Nodo<Cliente>* _arbol);
     void obtenerNombreCliente(Nodo<Cliente>* _arbol);
@@ -23,6 +22,7 @@ private:
     void eliminar(Nodo<Cliente>* _arbol,string _numero);
     Nodo<Cliente>* nodoMinimo(Nodo<Cliente>* _nodo);
     void destruirNodo(Nodo<Cliente>* _nodo);
+    void reemplazar(Nodo<Cliente>* arbol, Nodo<Cliente>* nodoEliminar, Nodo<Cliente>* nodoHijoDeEliminar);
 
 public:
     Abb();
@@ -45,8 +45,6 @@ public:
 
     void inOrderBuscar(string _numero){inOrderBuscar(raiz,_numero);}
 
-    void inOrderEliminar(string _numero){inOrderEliminar(raiz,_numero);}
-
     void preOrder(){preOrder(raiz);}
 
     void postOrder(){postOrder(raiz);}
@@ -55,7 +53,7 @@ public:
 
     void eliminar(string _numero){eliminar(raiz,_numero);}
 
-    void reemplazar(Nodo<Cliente>* _arbol, Nodo<Cliente>* _nodo, Nodo<Cliente>* _nuevoNodo);
+    void reemplazar(Nodo<Cliente>* nodoEliminar, Nodo<Cliente>* nodoHijoDeEliminar){reemplazar(raiz, nodoEliminar, nodoHijoDeEliminar);}
 
     ~Abb();
 };
