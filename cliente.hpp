@@ -13,7 +13,6 @@ class Cliente : protected Abonable
 			void asignarNumero(string _numero);
 			double obtenerPrecioFinal();
 			string obtenerNumero();
-			double obtenerPrecioFinal();
 			
 			virtual ~Cliente();
 };
