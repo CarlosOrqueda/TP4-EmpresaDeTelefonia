@@ -228,5 +228,5 @@ void Menu::eliminarCliente(Abb* _arbol)
 	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
 	cin >> numero;
 	}while(numero.length() != 8);
-	_arbol->inOrderEliminar(numero);
+	_arbol->eliminar(numero);
 }

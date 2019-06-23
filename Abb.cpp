@@ -135,15 +135,6 @@ void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
     inOrderBuscar(arbol->obtenerDerecha(), numero);
 }
 
-void Abb::inOrderEliminar(Nodo<Cliente>* arbol, string numero){
-    if(!arbol)
-        return;
-    inOrderEliminar(arbol->obtenerIzquierda(), numero);
-    if(numero == arbol->obtenerDato()->obtenerNumero())
-        eliminar(numero);
-    inOrderEliminar(arbol->obtenerDerecha(), numero);
-}
-
 void Abb::eliminarNodo(Nodo<Cliente>* nodoEliminar)
 {
     if(nodoEliminar->obtenerDerecha() && nodoEliminar->obtenerIzquierda())
@@ -154,16 +145,16 @@ void Abb::eliminarNodo(Nodo<Cliente>* nodoEliminar)
     }
     else if(nodoEliminar->obtenerIzquierda())
     {
-        reemplazar(raiz,nodoEliminar,nodoEliminar->obtenerIzquierda());
+        reemplazar(nodoEliminar,nodoEliminar->obtenerIzquierda());
         destruirNodo(nodoEliminar);
     }
     else if(nodoEliminar->obtenerDerecha())
     {
-        reemplazar(raiz,nodoEliminar,nodoEliminar->obtenerDerecha());
+        reemplazar(nodoEliminar,nodoEliminar->obtenerDerecha());
         destruirNodo(nodoEliminar);
     }
     else {
-        reemplazar(raiz,nodoEliminar,NULL);
+        reemplazar(nodoEliminar,NULL);
         destruirNodo(nodoEliminar);
     }
 }
