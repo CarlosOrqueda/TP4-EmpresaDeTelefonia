@@ -14,11 +14,15 @@ private:
     bool balanceado(Nodo* arbol);
     void eliminarArbol(Nodo* arbol);
     void inOrderMostrar(Nodo* arbol);
-    Cliente* inOrderBuscar(Nodo* arbol, string numero);
+    void inOrderBuscar(Nodo* arbol, string numero);
+    void inOrderEliminar(Nodo* arbol, string numero);
     void preOrder(Nodo* arbol);
     void postOrder(Nodo* arbol);
     void obtenerNombreCliente(Nodo* arbol);
-    void eliminarNodo(Nodo* arbol);
+    void eliminarNodo(Nodo* nodoEliminar);
+    void eliminar(Nodo* arbol,string numero);
+    Nodo* nodoMinimo(Nodo* nodo);
+    void destruirNodo(Nodo* nodo);
 
 public:
     Abb();
@@ -39,7 +43,9 @@ public:
 
     void inOrderMostrar(){inOrderMostrar(raiz);}
 
-    Cliente* inOrderBuscar(string numero){inOrderBuscar(raiz,numero);}
+    void inOrderBuscar(string numero){inOrderBuscar(raiz,numero);}
+
+    void inOrderEliminar(string numero){inOrderEliminar(raiz,numero);}
 
     void preOrder(){preOrder(raiz);}
 
@@ -47,7 +53,9 @@ public:
 
     void obtenerNombreCliente(){obtenerNombreCliente(raiz);}
 
-    void eliminarNodo(){eliminarNodo(raiz);}
+    void eliminar(string numero){eliminar(raiz,numero);}
+
+    void reemplazar(Nodo* arbol, Nodo* nodo, Nodo* nuevoNodo);
 
     ~Abb();
 };

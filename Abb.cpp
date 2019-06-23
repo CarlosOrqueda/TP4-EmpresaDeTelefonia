@@ -118,23 +118,100 @@ void Abb::obtenerNombreCliente(Nodo* arbol){
         cout<<clienteIndividuo->obtenerNombre()<<endl;
 }
 
-Cliente* Abb::inOrderBuscar(Nodo* arbol, string numero){
+void Abb::inOrderBuscar(Nodo* arbol, string numero){
     if(!arbol)
-        cout << "No existe el cliente";
         return;
     inOrderBuscar(arbol->obtenerIzquierda(), numero);
     if(numero == arbol->obtenerData()->obtenerNumero())
-        return arbol->obtenerData();
+    {
+        cout<<arbol->obtenerData()->obtenerNumero()<<endl;
+		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerData());
+    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerData());
+    	if(clienteFamilia)
+        	clienteFamilia->mostrarIntegrantes();
+    	if(clienteIndividuo){
+        	cout<<clienteIndividuo->obtenerNombre()<<endl;
+		}
+		cout<<arbol->obtenerData()->obtenerPrecioFinal()<<endl;
+    }    
     inOrderBuscar(arbol->obtenerDerecha(), numero);
 }
 
-void Abb::eliminarNodo(Nodo* arbol)
+void Abb::inOrderEliminar(Nodo* arbol, string numero){
+    if(!arbol)
+        return;
+    inOrderEliminar(arbol->obtenerIzquierda(), numero);
+    if(numero == arbol->obtenerData()->obtenerNumero())
+        eliminar(numero);
+    inOrderEliminar(arbol->obtenerDerecha(), numero);
+}
+
+void Abb::eliminarNodo(Nodo* nodoEliminar)
+{
+    if(nodoEliminar->obtenerDerecha() && nodoEliminar->obtenerIzquierda())
+    {
+        Nodo* nodoMenor = nodoMinimo(nodoEliminar->obtenerDerecha());
+        nodoEliminar->asignarData(nodoMenor->obtenerData());
+        eliminarNodo(nodoMenor);
+    }
+    else if(nodoEliminar->obtenerIzquierda())
+    {
+        reemplazar(raiz,nodoEliminar,nodoEliminar->obtenerIzquierda());
+        destruirNodo(nodoEliminar);
+    }
+    else if(nodoEliminar->obtenerDerecha())
+    {
+        reemplazar(raiz,nodoEliminar,nodoEliminar->obtenerDerecha());
+        destruirNodo(nodoEliminar);
+    }
+    else {
+        reemplazar(raiz,nodoEliminar,NULL);
+        destruirNodo(nodoEliminar);
+    }
+}
+
+void Abb::eliminar(Nodo* arbol, string numero)
 {
     if(!arbol)
-        return
-    arbol->asignarDerecha(NULL);
-    arbol->asignarIzquierda(NULL);
-    delete arbol;
+        return;
+    else if(numero < arbol->obtenerData()->obtenerNumero())
+            eliminar(arbol->obtenerIzquierda(),numero);
+    else if(numero > arbol->obtenerData()->obtenerNumero())
+            eliminar(arbol->obtenerDerecha(),numero);
+    else
+        eliminarNodo(arbol);
+}
+
+void Abb::reemplazar(Nodo* arbol, Nodo* nodoEliminar, Nodo* nodoHijoDeEliminar)
+{
+    if(!arbol)
+        return;
+    reemplazar(arbol->obtenerIzquierda(),nodoEliminar, nodoHijoDeEliminar);
+    if(arbol->obtenerIzquierda() == nodoEliminar || arbol -> obtenerDerecha() == nodoEliminar)
+    {
+        if(nodoEliminar->obtenerData()->obtenerNumero() == arbol->obtenerIzquierda()->obtenerData()->obtenerNumero())
+            arbol->asignarIzquierda(nodoHijoDeEliminar);
+        else if(nodoEliminar->obtenerData()->obtenerNumero() == arbol->obtenerDerecha()->obtenerData()->obtenerNumero())
+            arbol->asignarDerecha(nodoHijoDeEliminar);
+    }
+    reemplazar(arbol->obtenerDerecha(),nodoEliminar,nodoHijoDeEliminar);
+}
+
+Nodo* Abb::nodoMinimo(Nodo* nodo)
+{
+    if(!nodo)
+        return NULL;
+    if(nodo->obtenerIzquierda())
+        return nodoMinimo(nodo->obtenerIzquierda());
+    else
+        return nodo;
+}
+
+void Abb::destruirNodo(Nodo* nodo)
+{
+    nodo->asignarDerecha(NULL);
+    nodo->asignarIzquierda(NULL);
+    delete nodo;
 }
 
 Abb::~Abb() {

@@ -99,7 +99,7 @@ void Menu::cargarArchivo(Abb* _arbol)
 		
 		int i;
 		string listaNombres;
-		unsigned int posiciones[5];
+		size_t posiciones[5];
 		string nombre;//INDV
 		string nombres[5];//FLIA
 		
@@ -218,19 +218,7 @@ void Menu::buscarCliente(Abb* _arbol)
 	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
 	cin >> numero;
 	}while(numero.length() != 8);
-	Cliente* cliente = _arbol->inOrderBuscar(numero);
-	if(cliente)
-	{
-		cout<<cliente->obtenerNumero()<<endl;
-		Familia* clienteFamilia = dynamic_cast<Familia*> (_arbol->obtenerRaiz()->obtenerData());
-    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (_arbol->obtenerRaiz()->obtenerData());
-    	if(clienteFamilia)
-        	clienteFamilia->mostrarIntegrantes();
-    	if(clienteIndividuo){
-        	cout<<clienteIndividuo->obtenerNombre()<<endl;
-		}
-		cout<<cliente->obtenerPrecioFinal()<<endl;
-	}
+	_arbol->inOrderBuscar(numero);
 }
 
 void Menu::eliminarCliente(Abb* _arbol)
@@ -240,9 +228,5 @@ void Menu::eliminarCliente(Abb* _arbol)
 	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
 	cin >> numero;
 	}while(numero.length() != 8);
-	Cliente* cliente = _arbol->inOrderBuscar(numero);
-	if(cliente)
-	{
-		
-	}
+	_arbol->inOrderEliminar(numero);
 }

@@ -2,3 +2,5 @@
 .idea/
 .gitignore
 prueba
+CMakeList.txt
+camke-build-debug
