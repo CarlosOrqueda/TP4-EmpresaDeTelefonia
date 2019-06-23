@@ -1,6 +1,7 @@
 #include "cliente.hpp"
 
-Cliente::Cliente(string _numero) {
+Cliente::Cliente(string _numero)
+{
     numeroTelefono = _numero;
 }
 
@@ -14,7 +15,7 @@ string Cliente::obtenerNumero()
 	return numeroTelefono;
 }
 
-void Cliente::definirPrecioFinal()
+double Cliente::obtenerPrecioFinal()
 {
 	/*Este es el metodo abstracto puro que se define en individuo y 
 	familia con sus descuentos respectivos*/ 

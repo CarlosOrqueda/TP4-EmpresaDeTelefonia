@@ -11,7 +11,7 @@ class Cliente : protected Abonable
 	public:
             Cliente(string _numero);
 			void asignarNumero(string _numero);
-			void definirPrecioFinal();
+			double obtenerPrecioFinal();
 			string obtenerNumero();
 			double obtenerPrecioFinal();
 			

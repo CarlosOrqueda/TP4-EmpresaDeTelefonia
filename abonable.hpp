@@ -10,7 +10,7 @@ class Abonable
 		double precioBase = 323.44;
 		double precioFinal;
 	public:
-		virtual void definirPrecioFinal() = 0;
+		virtual double obtenerPrecioFinal() = 0;
 };
 
 #endif
