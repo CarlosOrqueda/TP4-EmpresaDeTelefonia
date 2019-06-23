@@ -3,7 +3,7 @@
 
 #include "abonable.hpp"
 
-class Cliente : protected Abonable
+class Cliente : public Abonable
 {
 
 	protected:
@@ -11,7 +11,6 @@ class Cliente : protected Abonable
 	public:
             Cliente(string _numero);
 			void asignarNumero(string _numero);
-			double obtenerPrecioFinal();
 			string obtenerNumero();
 			
 			virtual ~Cliente();
