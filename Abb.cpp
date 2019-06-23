@@ -1,9 +1,6 @@
 #include <iostream>
 #include "Abb.hpp"
-<<<<<<< HEAD
-=======
 #include "individuo.hpp"
->>>>>>> 4ce374b9e18f0895784416d2b0a18b7af181c343
 #include "familia.hpp"
 using namespace std;
 
@@ -11,22 +8,13 @@ Abb::Abb() {
     raiz = NULL;
 }
 
-<<<<<<< HEAD
-Nodo* Abb::obtenerRaiz(){
-    return raiz;
-}
-
-void Abb::insertar(Nodo* arbol,Cliente* nuevoCliente) {
-=======
 Nodo<Cliente>* Abb::obtenerRaiz(){
     return raiz;
 }
 
 void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
->>>>>>> 4ce374b9e18f0895784416d2b0a18b7af181c343
     if(!arbol) {
         arbol = new Nodo<Cliente>(nuevoCliente);
-        raiz = arbol;
     }else{
         if(nuevoCliente->obtenerNumero() < raiz->obtenerDato()->obtenerNumero()){
             if(!arbol->obtenerIzquierda()) {
@@ -62,9 +50,8 @@ bool Abb::balanceado(Nodo<Cliente> *arbol) {
 }
 
 Nodo<Cliente>* Abb::obtenerNodoMaximo() {
-    if(!raiz) {
+    if(!raiz)
         cout << "Arbol vacio" << endl;
-    }
     Nodo<Cliente>* arbol = raiz;
     while(arbol->obtenerDerecha())
         arbol = arbol->obtenerDerecha();
@@ -92,28 +79,17 @@ void Abb::eliminarArbol(Nodo<Cliente>* arbol) {
     eliminarArbol(arbolDerecho);
 }
 
-<<<<<<< HEAD
-void  Abb::inOrderMostrar(Nodo *arbol) {
-=======
 void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
->>>>>>> 4ce374b9e18f0895784416d2b0a18b7af181c343
     if(!arbol)
         return;
     inOrderMostrar(arbol->obtenerIzquierda());
     cout << "******************************************************************************************************";
-<<<<<<< HEAD
-    cout<<arbol->obtenerData()->obtenerNumero()<<": ";
-    obtenerNombreCliente();
-    cout<<"El Precio final es: "<<arbol->obtenerData()->obtenerPrecioFinal();
-=======
     cout<<arbol->obtenerDato()->obtenerNumero()<<": ";
     obtenerNombreCliente();
-    cout<<"El Precio final es: "<< (arbol->obtenerDato()->obtenerPrecioFinal());
->>>>>>> 4ce374b9e18f0895784416d2b0a18b7af181c343
+    cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal();
     inOrderMostrar(arbol->obtenerDerecha());
 }
-
-void Abb::preOrder(Nodo<Cliente> *arbol) {
+void Abb::preOrder(Nodo<Cliente>* arbol){
     if(!arbol)
         return;
     cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
@@ -236,51 +212,51 @@ void Abb::destruirNodo(Nodo<Cliente>* nodo)
     delete nodo;
 }
 
-void Abb::obtenerNombreCliente(Nodo* arbol){
+void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol){
     if(!arbol)
         return;
-    Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerData());
-    Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerData());
+    Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
+    Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     if(clienteFamilia)
         clienteFamilia->mostrarIntegrantes();
     if(clienteIndividuo)
         cout<<clienteIndividuo->obtenerNombre()<<endl;
 }
 
-void Abb::inOrderBuscar(Nodo* arbol, string numero){
+void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
     if(!arbol)
         return;
     inOrderBuscar(arbol->obtenerIzquierda(), numero);
-    if(numero == arbol->obtenerData()->obtenerNumero())
+    if(numero == arbol->obtenerDato()->obtenerNumero())
     {
-        cout<<arbol->obtenerData()->obtenerNumero()<<endl;
-		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerData());
-    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerData());
+        cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
+		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
+    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     	if(clienteFamilia)
         	clienteFamilia->mostrarIntegrantes();
     	if(clienteIndividuo){
         	cout<<clienteIndividuo->obtenerNombre()<<endl;
 		}
-		cout<<arbol->obtenerData()->obtenerPrecioFinal()<<endl;
+		cout<<arbol->obtenerDato()->obtenerPrecioFinal()<<endl;
     }    
     inOrderBuscar(arbol->obtenerDerecha(), numero);
 }
 
-void Abb::inOrderEliminar(Nodo* arbol, string numero){
+void Abb::inOrderEliminar(Nodo<Cliente>* arbol, string numero){
     if(!arbol)
         return;
     inOrderEliminar(arbol->obtenerIzquierda(), numero);
-    if(numero == arbol->obtenerData()->obtenerNumero())
+    if(numero == arbol->obtenerDato()->obtenerNumero())
         eliminar(numero);
     inOrderEliminar(arbol->obtenerDerecha(), numero);
 }
 
-void Abb::eliminarNodo(Nodo* nodoEliminar)
+void Abb::eliminarNodo(Nodo<Cliente>* nodoEliminar)
 {
     if(nodoEliminar->obtenerDerecha() && nodoEliminar->obtenerIzquierda())
     {
-        Nodo* nodoMenor = nodoMinimo(nodoEliminar->obtenerDerecha());
-        nodoEliminar->asignarData(nodoMenor->obtenerData());
+        Nodo<Cliente>* nodoMenor = nodoMinimo(nodoEliminar->obtenerDerecha());
+        nodoEliminar->asignarDato(nodoMenor->obtenerDato());
         eliminarNodo(nodoMenor);
     }
     else if(nodoEliminar->obtenerIzquierda())
@@ -299,34 +275,34 @@ void Abb::eliminarNodo(Nodo* nodoEliminar)
     }
 }
 
-void Abb::eliminar(Nodo* arbol, string numero)
+void Abb::eliminar(Nodo<Cliente>* arbol, string numero)
 {
     if(!arbol)
         return;
-    else if(numero < arbol->obtenerData()->obtenerNumero())
+    else if(numero < arbol->obtenerDato()->obtenerNumero())
             eliminar(arbol->obtenerIzquierda(),numero);
-    else if(numero > arbol->obtenerData()->obtenerNumero())
+    else if(numero > arbol->obtenerDato()->obtenerNumero())
             eliminar(arbol->obtenerDerecha(),numero);
     else
         eliminarNodo(arbol);
 }
 
-void Abb::reemplazar(Nodo* arbol, Nodo* nodoEliminar, Nodo* nodoHijoDeEliminar)
+void Abb::reemplazar(Nodo<Cliente>* arbol, Nodo<Cliente>* nodoEliminar, Nodo<Cliente>* nodoHijoDeEliminar)
 {
     if(!arbol)
         return;
     reemplazar(arbol->obtenerIzquierda(),nodoEliminar, nodoHijoDeEliminar);
     if(arbol->obtenerIzquierda() == nodoEliminar || arbol -> obtenerDerecha() == nodoEliminar)
     {
-        if(nodoEliminar->obtenerData()->obtenerNumero() == arbol->obtenerIzquierda()->obtenerData()->obtenerNumero())
+        if(nodoEliminar->obtenerDato()->obtenerNumero() == arbol->obtenerIzquierda()->obtenerDato()->obtenerNumero())
             arbol->asignarIzquierda(nodoHijoDeEliminar);
-        else if(nodoEliminar->obtenerData()->obtenerNumero() == arbol->obtenerDerecha()->obtenerData()->obtenerNumero())
+        else if(nodoEliminar->obtenerDato()->obtenerNumero() == arbol->obtenerDerecha()->obtenerDato()->obtenerNumero())
             arbol->asignarDerecha(nodoHijoDeEliminar);
     }
     reemplazar(arbol->obtenerDerecha(),nodoEliminar,nodoHijoDeEliminar);
 }
 
-Nodo* Abb::nodoMinimo(Nodo* nodo)
+Nodo<Cliente>* Abb::nodoMinimo(Nodo<Cliente>* nodo)
 {
     if(!nodo)
         return NULL;
@@ -336,7 +312,7 @@ Nodo* Abb::nodoMinimo(Nodo* nodo)
         return nodo;
 }
 
-void Abb::destruirNodo(Nodo* nodo)
+void Abb::destruirNodo(Nodo<Cliente>* nodo)
 {
     nodo->asignarDerecha(NULL);
     nodo->asignarIzquierda(NULL);
