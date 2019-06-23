@@ -20,6 +20,7 @@ class Menu
 		void darAlta(Abb* _arbol);
 		void listarClientes(Abb* _arbol);
 		void buscarCliente(Abb* _arbol);
+		void eliminarCliente(Abb* _arbol);
 
 	public:
 		void mostrarMenu();

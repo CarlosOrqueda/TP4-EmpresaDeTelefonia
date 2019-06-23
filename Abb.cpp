@@ -1,11 +1,14 @@
 #include <iostream>
 #include "Abb.hpp"
-
-
+#include "familia.hpp"
 using namespace std;
 
 Abb::Abb() {
     raiz = NULL;
+}
+
+Nodo* Abb::obtenerRaiz(){
+    return raiz;
 }
 
 void Abb::insertar(Nodo* arbol,Cliente* nuevoCliente) {
@@ -77,12 +80,15 @@ void Abb::eliminarArbol(Nodo* arbol) {
     eliminarArbol(arbolDerecho);
 }
 
-void  Abb::inOrder(Nodo *arbol) {
+void  Abb::inOrderMostrar(Nodo *arbol) {
     if(!arbol)
         return;
-    inOrder(arbol->obtenerIzquierda());
-    cout<<arbol->obtenerData()->obtenerNumero()<<endl;
-    inOrder(arbol->obtenerDerecha());
+    inOrderMostrar(arbol->obtenerIzquierda());
+    cout << "******************************************************************************************************";
+    cout<<arbol->obtenerData()->obtenerNumero()<<": ";
+    obtenerNombreCliente();
+    cout<<"El Precio final es: "<<arbol->obtenerData()->obtenerPrecioFinal();
+    inOrderMostrar(arbol->obtenerDerecha());
 }
 
 void Abb::preOrder(Nodo *arbol) {
@@ -99,6 +105,36 @@ void Abb::postOrder(Nodo *arbol) {
     postOrder(arbol->obtenerIzquierda());
     postOrder(arbol->obtenerDerecha());
     cout<<arbol->obtenerData()->obtenerNumero()<<endl;
+}
+
+void Abb::obtenerNombreCliente(Nodo* arbol){
+    if(!arbol)
+        return;
+    Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerData());
+    Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerData());
+    if(clienteFamilia)
+        clienteFamilia->mostrarIntegrantes();
+    if(clienteIndividuo)
+        cout<<clienteIndividuo->obtenerNombre()<<endl;
+}
+
+Cliente* Abb::inOrderBuscar(Nodo* arbol, string numero){
+    if(!arbol)
+        cout << "No existe el cliente";
+        return;
+    inOrderBuscar(arbol->obtenerIzquierda(), numero);
+    if(numero == arbol->obtenerData()->obtenerNumero())
+        return arbol->obtenerData();
+    inOrderBuscar(arbol->obtenerDerecha(), numero);
+}
+
+void Abb::eliminarNodo(Nodo* arbol)
+{
+    if(!arbol)
+        return
+    arbol->asignarDerecha(NULL);
+    arbol->asignarIzquierda(NULL);
+    delete arbol;
 }
 
 Abb::~Abb() {

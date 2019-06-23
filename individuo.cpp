@@ -23,5 +23,10 @@ Individuo::~Individuo()
 }
 double Individuo::obtenerPrecioFinal()
 {
-	return precioBase-(precioBase*0.1);
+	return precioFinal;
+}
+
+void Individuo::definirPrecioFinal()
+{
+	precioFinal = precioBase-(precioBase*0.1);
 }

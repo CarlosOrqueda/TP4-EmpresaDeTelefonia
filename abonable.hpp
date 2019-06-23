@@ -8,6 +8,7 @@ class Abonable
 {
 	protected:
 		double precioBase = 323.44;
+		double precioFinal;
 	public:
 		virtual void definirPrecioFinal() = 0;
 };

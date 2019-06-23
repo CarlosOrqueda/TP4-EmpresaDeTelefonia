@@ -12,7 +12,7 @@ class Individuo: public Cliente
 			Individuo(string numero, string _nombre);
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
-			
+			void definirPrecioFinal();
 			double obtenerPrecioFinal();
 			
 			~Individuo();

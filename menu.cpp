@@ -1,5 +1,6 @@
 #include "menu.hpp"
 #include <iostream>
+#include <string>
 using namespace std;
 
 void Menu::mostrarMenu()
@@ -96,26 +97,25 @@ void Menu::cargarArchivo(Abb* _arbol)
 	{
 		string numero;
 		
-		int i = 0;
+		int i;
 		string listaNombres;
-		int posiciones[5];
+		unsigned int posiciones[5];
 		string nombre;//INDV
 		string nombres[5];//FLIA
 		
 		while (listaClientes.good())
 		{
-			i = 0;
+			i = 1;
 			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
 			{
 				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
 				{
-					i++;
 					string busco = ",";
 					size_t pos = listaNombres.find(busco);
 					while( pos != std::string::npos) //OBTENER POSICIONES
 					{
 						posiciones[i] = pos;
-						pos = listaNombres.find(busco, pos + busco.size());
+						pos = listaNombres.find(busco, pos + 1);
 						i++;
 					}
 					if(i == 1) //INDIVIDUO
@@ -133,7 +133,7 @@ void Menu::cargarArchivo(Abb* _arbol)
 								if(j == i-1)
 									nombres[j] = listaNombres.substr(posiciones[j]+1); //Ultimo
 								else
-									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1) );
+									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1));
 							}
 						}
 					}
@@ -190,7 +190,7 @@ void Menu::darAlta(Abb* _arbol)
 		int cant = 0;
 		while(!valido)
 		{
-			cout<<"Ingrese la cantidad de Integrantes(MIN 1/MAX 10): ";
+			cout<<"Ingrese la cantidad de I¿ntegrantes(MIN 1/MAX 10): ";
 			cin>>cant;
 			valido = ((cant>0)&&(cant<=10));
 		}
@@ -205,16 +205,44 @@ void Menu::darAlta(Abb* _arbol)
 		_arbol->insertar(_familia);
 	}
 }
+
 void Menu::listarClientes(Abb* _arbol)
 {
-	/*cout<<numero<<": ";
-	if(i == 1)
-		cout<<nombre<<" ";
-	else
-		for(int j = 0; j < i; j++)
-			cout<<nombres[j]<<" ";
-	cout<<endl;*/
+	_arbol->inOrderMostrar();
 }
+
 void Menu::buscarCliente(Abb* _arbol)
 {
+	string numero;
+	do{
+	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
+	cin >> numero;
+	}while(numero.length() != 8);
+	Cliente* cliente = _arbol->inOrderBuscar(numero);
+	if(cliente)
+	{
+		cout<<cliente->obtenerNumero()<<endl;
+		Familia* clienteFamilia = dynamic_cast<Familia*> (_arbol->obtenerRaiz()->obtenerData());
+    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (_arbol->obtenerRaiz()->obtenerData());
+    	if(clienteFamilia)
+        	clienteFamilia->mostrarIntegrantes();
+    	if(clienteIndividuo){
+        	cout<<clienteIndividuo->obtenerNombre()<<endl;
+		}
+		cout<<cliente->obtenerPrecioFinal()<<endl;
+	}
+}
+
+void Menu::eliminarCliente(Abb* _arbol)
+{
+	string numero;
+	do{
+	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
+	cin >> numero;
+	}while(numero.length() != 8);
+	Cliente* cliente = _arbol->inOrderBuscar(numero);
+	if(cliente)
+	{
+		
+	}
 }
