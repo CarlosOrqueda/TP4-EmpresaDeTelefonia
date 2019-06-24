@@ -2,36 +2,23 @@
 
 Familia::Familia(string numero) :Cliente(numero)
 {
-	integrantes[10] = NULL;
+	integrantes[10] = {""};
 	tope = 0;
 }
 Familia::Familia(string numero,string _nombres[],int _tam) :Cliente(numero)
 {
-	tope = _tam;
-	for(int i = 0; i < tope; i++)
+	for(int i = 0; i < _tam; i++)
 	{
-		Individuo* individuo = new Individuo(_nombres[i]);
-		integrantes[i] = individuo;
+		integrantes[i] = _nombres[i];
 	}
 }
-
-void Familia::mostrarIntegrantes()
+string Familia::obtenerIntegrante(int _pos)
 {
-	for(int i = 0; i < tope; i++)
-	{
-		cout << integrantes[i]->obtenerNombre() << " ";
-	}
-	cout<<endl;
+	return integrantes[_pos];
 } 
-
 double Familia::obtenerPrecioFinal()
 {
-	return precioFinal;
-}
-
-void Familia::definirPrecioFinal()
-{
-	precioFinal = precioBase-(precioBase*0.35);
+	return precioBase = precioBase-(precioBase*0.35);
 }
 
 Familia::~Familia()
