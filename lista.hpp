@@ -1,6 +1,6 @@
 #ifndef LISTA_HPP
 #define LISTA_HPP
-#include "Nodo.hpp"
+#include "nodoLista.hpp"
 #include <string>
 #include <iostream>
 using namespace std;
@@ -9,13 +9,13 @@ class Lista
 {
 	private:
 		//Primer elemento de la lista
-		Nodo<Dato>* head;
+		NodoLista<Dato>* head;
 		//Tamanio de la lista
 		int tamanio;
 		//Obtener nodo en una posicion
 		//PRE: Debe de existir un nodo
 		//POST: Devuelve el nodo en una posicion
-		Nodo<Dato>* obtenerNodo(int posicion);
+		NodoLista<Dato>* obtenerNodo(int posicion);
 
 	public:
 		//Constructor
@@ -53,9 +53,9 @@ Lista<Dato>::Lista()
 }
 //Obtener Nodo
 template <typename Dato>
-Nodo<Dato>* Lista<Dato>::obtenerNodo(int posicion)
+NodoLista<Dato>* Lista<Dato>::obtenerNodo(int posicion)
 {
-	Nodo<Dato>* actual = head;
+	NodoLista<Dato>* actual = head;
 	for (int i = 1; i < posicion; i++)
 	{
 		actual = actual->obtenerSiguiente();
@@ -72,13 +72,13 @@ int Lista<Dato>::obtenerTamanio()
 template <typename Dato>
 bool Lista<Dato>::estaVacia()
 {
-	return (head == NULL ? true : false);
+	return (head == nullptr);
 }
 //Agregar un nodo con un dato a la lista
 template <typename Dato>
 void Lista<Dato>::agregar(Dato *unDato)
 {
-	Nodo<Dato> *nuevo = new Nodo(unDato);
+	NodoLista<Dato> *nuevo = new NodoLista<Dato>(unDato);
 	if (estaVacia())
 		head = nuevo;
 	else
@@ -94,7 +94,7 @@ Lista<Dato>::~Lista()
 {
 	while (tamanio > 0)
 	{
-		Nodo<Dato> *iterador = head;
+		NodoLista<Dato> *iterador = head;
 		Dato *datoActual = iterador->obtenerDato();
 		delete datoActual;
 		head = (iterador->obtenerSiguiente());
@@ -106,7 +106,7 @@ Lista<Dato>::~Lista()
 template <typename Dato>
 Dato *Lista<Dato>::consultar(int posicion)
 {
-	Nodo<Dato> *consultado = obtenerNodo(posicion);
+	NodoLista<Dato> *consultado = obtenerNodo(posicion);
 	return consultado->obtenerDato();
 }
 

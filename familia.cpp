@@ -2,26 +2,30 @@
 
 Familia::Familia(string numero) :Cliente(numero)
 {
-	integrantes[10] = {""};
-	tope = 0;
+	listaIndividuos = new Lista<string>();
 }
-Familia::Familia(string numero,string _nombres[],int _tam) :Cliente(numero)
+
+void Familia::mostrarIntegrantes()
 {
-	for(int i = 0; i < _tam; i++)
-	{
-		integrantes[i] = _nombres[i];
+	int tamanio = listaIndividuos->obtenerTamanio();
+	for (int i = 0; i < tamanio ; i++){
+		string nombre = *(listaIndividuos->consultar(i));
+		cout << nombre << " ";
 	}
-}
-string Familia::obtenerIntegrante(int _pos)
-{
-	return integrantes[_pos];
+	cout << endl;
 } 
 double Familia::obtenerPrecioFinal()
 {
-	return precioBase = precioBase-(precioBase*0.35);
+	precioBase = precioBase-(precioBase*0.35);
+	double precioFinal = precioBase*listaIndividuos->obtenerTamanio();
+	return precioFinal;
+}
+
+void Familia::agregarIntegrantes(string* _nombre){
+	listaIndividuos->agregar(_nombre);
 }
 
 Familia::~Familia()
 {
-	
+	delete listaIndividuos;
 }

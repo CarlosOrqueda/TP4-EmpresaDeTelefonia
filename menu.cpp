@@ -33,7 +33,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 	{
 		case 1:
 		{
-			cargarArchivo(_arbol);
+			leerArchivo(_arbol);
 			break;
 		}
 		case 2:
@@ -82,7 +82,7 @@ bool Menu::obtenerSalir()
 
 
 
-void Menu::cargarArchivo(Abb* _arbol)
+ void Menu::leerArchivo(Abb* _arbol)
 {
 	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
@@ -96,16 +96,20 @@ void Menu::cargarArchivo(Abb* _arbol)
 	else
 	{
 		string numero;
-		
-		int i;
-		string listaNombres;
-		size_t posiciones[5];
-		string nombre;//INDV
-		string nombres[5];//FLIA
+		Familia* _familia = new Familia(numero);//FAMILIA
+		string* integranteActual = new string();
 		
 		while (listaClientes.good())
 		{
-			i = 1;
+			getline(listaClientes,numero,','); //NUMERO
+			getline(listaClientes,integranteActual,'\n');
+		
+			}
+				
+		}
+	}
+}
+/*i = 1;
 			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
 			{
 				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
@@ -145,20 +149,20 @@ void Menu::cargarArchivo(Abb* _arbol)
 				}
 				else
 				{
-					//Familia* _familia = new Familia(numero,nombres,i);
-					//_arbol->insertar(_familia);
+					for (int z = 0; z < nombres.; z++)
+					{
+						
+					}
+					
 				}
-			}
-		}
-	}
-}
-
+			} */
 void Menu::darAlta(Abb* _arbol)
 {
 	string legajo;
-	cout<<"Ingrese un legajo: ";
-	cin>>legajo;
-	
+	do{
+		cout<<"Ingrese un legajo: ";
+		cin>>legajo;
+	}while(legajo.length() != 6);
 	int tipo = 0;
 	cout<<"Que Tipo de Cliente Desea Ingresar?"<<endl;
 	while((tipo != 1)&&(tipo != 2))
@@ -166,42 +170,28 @@ void Menu::darAlta(Abb* _arbol)
 		cout<<"Individuo[1] - Familia[2]: "<<endl;
 		cin>>tipo;
 	}
-	
-	string ceros = "";
-	int cant = 8-(legajo.size());
-	for(int i = 0; i<cant; i++)
-	{
-		ceros = ceros+"0";
-	}
-	
-	string numTel = ceros+legajo;
-	
+	string numTelefono = "00"+legajo;
 	if(tipo == 1)
 	{
 		string nombre;
 		cout<<"Ingrese APELLIDO_NOMBRE: ";
 		cin>>nombre;
-		Individuo* _individuo = new Individuo(numTel,nombre);
+		Individuo* _individuo = new Individuo(numTelefono,nombre);
 		_arbol->insertar(_individuo);
 	}
 	else if(tipo == 2)
 	{
-		bool valido = false;
-		int cant = 0;
-		while(!valido)
-		{
-			cout<<"Ingrese la cantidad de I¿ntegrantes(MIN 1/MAX 10): ";
-			cin>>cant;
-			valido = ((cant>0)&&(cant<=10));
-		}
-		string famNombres[10];
-		
-		for(int i = 0; i<cant; i++)
-		{
-			cout<<"Ingrese APELLIDO_NOMBRE: ";
-			cin>>famNombres[i];
-		}
-		Familia* _familia = new Familia(numTel,famNombres,cant);
+		string* integrante = new string();
+		string continuar;
+		Familia* _familia = new Familia(numTelefono);
+		do{
+			cout << "Ingrese un miembro de tu familia APELLIDO_NOMBRE: ";
+			cin >> *integrante;
+			_familia->agregarIntegrantes(integrante);
+			cout<<"Desea seguir ingresando familiares?[si/no]:";
+			cin>>continuar;
+		}while(continuar == "si");
+
 		_arbol->insertar(_familia);
 	}
 }

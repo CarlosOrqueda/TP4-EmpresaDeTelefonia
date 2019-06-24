@@ -20,10 +20,9 @@ void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
     }
     else
 	{
-        cout<<"NO vacio->Nuevo elemento"<<endl;
 		if(nuevoCliente->obtenerNumero() < raiz->obtenerDato()->obtenerNumero())
 		{
-            if(!arbol->obtenerIzquierda())
+            if(arbol->obtenerIzquierda() == nullptr)
 			{
                 Nodo<Cliente> *nuevoArbol = new Nodo<Cliente>(nuevoCliente);
                 arbol->asignarIzquierda(nuevoArbol);
@@ -31,9 +30,9 @@ void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
             else
                 insertar(arbol->obtenerIzquierda(),nuevoCliente);
         }
-        else
+        else if (nuevoCliente->obtenerNumero() > raiz->obtenerDato()->obtenerNumero())
 		{
-            if(!arbol->obtenerDerecha())
+            if(arbol->obtenerDerecha() == nullptr)
 			{
                 Nodo<Cliente>* nuevoArbol = new Nodo<Cliente>(nuevoCliente);
                 arbol->asignarDerecha(nuevoArbol);
@@ -128,7 +127,7 @@ void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
     Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
     Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     if(clienteFamilia)
-        clienteFamilia->obtenerIntegrante(0);
+        clienteFamilia->mostrarIntegrantes();
     if(clienteIndividuo)
         cout<<clienteIndividuo->obtenerNombre()<<endl;
 }
@@ -146,7 +145,7 @@ void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
 		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
     	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     	if(clienteFamilia)
-        	clienteFamilia->obtenerIntegrante(0);
+        	clienteFamilia->mostrarIntegrantes();
     	if(clienteIndividuo){
         	cout<<clienteIndividuo->obtenerNombre()<<endl;
 		}
