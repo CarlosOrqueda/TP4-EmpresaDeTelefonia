@@ -35,7 +35,7 @@ class Lista
 		void remover(int posicion);
 		//Consulta el tamanio
 		//PRE: La no puede estar vacia
-		//POST: Devuelve el nodo con su dato en la posicion
+		//POST: Devuelve el dato puntero en la posicion
 		Dato* consultar(int posicion);
 		//Esta vacio?
 		//POST : Devuelve True si la lista esta vacia y False si no

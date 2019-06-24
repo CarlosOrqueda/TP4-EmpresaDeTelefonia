@@ -84,78 +84,9 @@ bool Menu::obtenerSalir()
 
  void Menu::leerArchivo(Abb* _arbol)
 {
-	string nombreArchivo;
-	cout << "Inserte Nombre Archivo: ";
-	cin >> nombreArchivo;
-
-	ifstream listaClientes(nombreArchivo);
-	if (!listaClientes.is_open())
-	{
-		cout << "ERROR Archivo inexistente" << endl;
-	}
-	else
-	{
-		string numero;
-		Familia* _familia = new Familia(numero);//FAMILIA
-		string* integranteActual = new string();
-		
-		while (listaClientes.good())
-		{
-			getline(listaClientes,numero,','); //NUMERO
-			getline(listaClientes,integranteActual,'\n');
-		
-			}
-				
-		}
-	}
+	/*codigo que exploto/murio  */
 }
-/*i = 1;
-			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
-			{
-				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
-				{
-					string busco = ",";
-					size_t pos = listaNombres.find(busco);
-					while( pos != std::string::npos) //OBTENER POSICIONES
-					{
-						posiciones[i] = pos;
-						pos = listaNombres.find(busco, pos + 1);
-						i++;
-					}
-					if(i == 1) //INDIVIDUO
-					{
-						nombre = listaNombres.substr(0,posiciones[1]);
-					}
-					else //FAMILIA
-					{
-						for(int j = 0; j < i; j++) //OBTENER SUBSTRINGS
-						{
-							if(j == 0)
-								nombres[j] = listaNombres.substr(0,posiciones[j+1]); //Primero
-							else
-							{
-								if(j == i-1)
-									nombres[j] = listaNombres.substr(posiciones[j]+1); //Ultimo
-								else
-									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1));
-							}
-						}
-					}
-				}
-				if(i == 1)
-				{
-					Individuo* _individuo = new Individuo(numero,nombre);
-					_arbol->insertar(_individuo);
-				}
-				else
-				{
-					for (int z = 0; z < nombres.; z++)
-					{
-						
-					}
-					
-				}
-			} */
+
 void Menu::darAlta(Abb* _arbol)
 {
 	string legajo;

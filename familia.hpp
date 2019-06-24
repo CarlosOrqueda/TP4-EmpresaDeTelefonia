@@ -15,7 +15,7 @@ class Familia: public Cliente
 			
 			double obtenerPrecioFinal();
 
-			void agregarIntegrantes(string* _nombre);
+			void agregarIntegrantes(string* _nombre); // usen esto con el cargarArchivo Recibe un PUNTERO a un string 
 			
 			~Familia();
 };
