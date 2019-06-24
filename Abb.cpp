@@ -13,20 +13,32 @@ Nodo<Cliente>* Abb::obtenerRaiz(){
 }
 
 void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
-    if(!arbol) {
-        arbol = new Nodo<Cliente>(nuevoCliente);
-    }else{
-        if(nuevoCliente->obtenerNumero() < raiz->obtenerDato()->obtenerNumero()){
-            if(!arbol->obtenerIzquierda()) {
+    if(!arbol)
+	{
+        cout<<"vacio->Nueva Raiz-> ";
+		arbol = new Nodo<Cliente>(nuevoCliente);
+    }
+    else
+	{
+        cout<<"NO vacio->Nuevo elemento"<<endl;
+		if(nuevoCliente->obtenerNumero() < raiz->obtenerDato()->obtenerNumero())
+		{
+            if(!arbol->obtenerIzquierda())
+			{
                 Nodo<Cliente> *nuevoArbol = new Nodo<Cliente>(nuevoCliente);
                 arbol->asignarIzquierda(nuevoArbol);
-            }else
+            }
+            else
                 insertar(arbol->obtenerIzquierda(),nuevoCliente);
-        }else{
-            if(!arbol->obtenerDerecha()){
+        }
+        else
+		{
+            if(!arbol->obtenerDerecha())
+			{
                 Nodo<Cliente>* nuevoArbol = new Nodo<Cliente>(nuevoCliente);
                 arbol->asignarDerecha(nuevoArbol);
-            }else
+            }
+            else
                 insertar(arbol->obtenerDerecha(),nuevoCliente);
         }
     }
@@ -81,7 +93,10 @@ void Abb::eliminarArbol(Nodo<Cliente>* arbol) {
 
 void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     if(!arbol)
-        return;
+	{
+		cout<<"Aun No Hay Clientes"<<endl;
+		return;
+	}
     inOrderMostrar(arbol->obtenerIzquierda());
     cout << "******************************************************************************************************";
     cout<<arbol->obtenerDato()->obtenerNumero()<<": ";
@@ -89,6 +104,7 @@ void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal();
     inOrderMostrar(arbol->obtenerDerecha());
 }
+
 void Abb::preOrder(Nodo<Cliente>* arbol){
     if(!arbol)
         return;
@@ -105,20 +121,24 @@ void Abb::postOrder(Nodo<Cliente> *arbol) {
     cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
 }
 
-void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol){
+void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
+{
     if(!arbol)
         return;
     Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
     Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     if(clienteFamilia)
-        clienteFamilia->mostrarIntegrantes();
+        clienteFamilia->obtenerIntegrante(0);
     if(clienteIndividuo)
         cout<<clienteIndividuo->obtenerNombre()<<endl;
 }
 
 void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
     if(!arbol)
-        return;
+	{
+		cout<<"Aun No Hay Clientes"<<endl;
+		return;
+	}
     inOrderBuscar(arbol->obtenerIzquierda(), numero);
     if(numero == arbol->obtenerDato()->obtenerNumero())
     {
@@ -126,7 +146,7 @@ void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
 		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
     	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
     	if(clienteFamilia)
-        	clienteFamilia->mostrarIntegrantes();
+        	clienteFamilia->obtenerIntegrante(0);
     	if(clienteIndividuo){
         	cout<<clienteIndividuo->obtenerNombre()<<endl;
 		}

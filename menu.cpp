@@ -43,14 +43,14 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 		}
 		case 3:
 		{
-			//listarClientes();
+			listarClientes(_arbol);
 			break;
 		}
 		case 4:
 		{
-			//buscarCliente();
+			/*buscarCliente(_arbol);
 			cout<<"1- Calcular Precio Final por Abonar."<<endl;
-			cout<<"2- Dar de Baja al Cliente."<<endl;
+			cout<<"2- Dar de Baja al Cliente."<<endl;*/
 			break;
 		}	
 		case 5:
@@ -145,8 +145,8 @@ void Menu::cargarArchivo(Abb* _arbol)
 				}
 				else
 				{
-					Familia* _familia = new Familia(numero,nombres,i);
-					_arbol->insertar(_familia);
+					//Familia* _familia = new Familia(numero,nombres,i);
+					//_arbol->insertar(_familia);
 				}
 			}
 		}

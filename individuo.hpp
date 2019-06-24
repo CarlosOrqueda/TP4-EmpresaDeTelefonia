@@ -10,9 +10,10 @@ class Individuo: public Cliente
 	public:
 			Individuo(string numero);
 			Individuo(string numero, string _nombre);
+			
 			void asignarNombre(string _nombre);
 			string obtenerNombre();
-			void definirPrecioFinal();
+			
 			double obtenerPrecioFinal();
 			
 			~Individuo();

@@ -17,16 +17,11 @@ string Individuo::obtenerNombre()
 {
 	return nombre;
 }
+double Individuo::obtenerPrecioFinal()
+{
+	return precioBase = precioBase-(precioBase*0.1);
+}
 Individuo::~Individuo()
 {
 	
-}
-double Individuo::obtenerPrecioFinal()
-{
-	return precioFinal;
-}
-
-void Individuo::definirPrecioFinal()
-{
-	precioFinal = precioBase-(precioBase*0.1);
 }
