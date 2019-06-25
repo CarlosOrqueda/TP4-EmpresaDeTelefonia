@@ -1,6 +1,7 @@
 #include "menu.hpp"
 #include <iostream>
 #include <string>
+#include <istream>
 using namespace std;
 
 void Menu::mostrarMenu()
@@ -84,7 +85,94 @@ bool Menu::obtenerSalir()
 
  void Menu::leerArchivo(Abb* _arbol)
 {
-	/*codigo que exploto/murio  */
+	string nombreArchivo;
+	cout << "Inserte Nombre Archivo: ";
+	cin >> nombreArchivo;
+
+	ifstream listaClientes(nombreArchivo);
+	if (!listaClientes.is_open())
+	{
+		cout << "ERROR Archivo inexistente" << endl;
+	}
+	else
+	{
+		int cantidad = 0;	//CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
+		unsigned int end = 4294967295;
+		string numero;	//NUM. TEL.
+		string nombre;	//INDIVIDUO
+		string nombres;	//STRING DE DONDE SE EXTRAERAN LAS SUBSTR
+		Lista<size_t>* listaPosiciones = new Lista<size_t>;
+		Lista<string>* listaIntegrantes = new Lista<string>;
+		
+		while (listaClientes.good())
+		{
+			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
+			{
+				cout<<numero<<": ";
+				if(getline(listaClientes,nombres,'\n'))	//OBTENER NOMBRES TODOS EN UN SOLO STRING
+				{
+					string buscado = ",";
+					size_t Prposicion = nombres.find(buscado);
+					
+					if(Prposicion != end ) //FAMILIA
+					{
+						listaPosiciones->agregar(&Prposicion); //PRIMERA COMA
+						cantidad = 1;
+						cout<<cantidad<<"["<<*(listaPosiciones->consultar(cantidad))<<"]";
+						size_t last = Prposicion;
+						
+						
+						//ACA EL PROBLEMA
+						while( last != end) //OBTENER RESTO POSICIONES
+						{
+							size_t* posicion = new size_t(nombres.find(buscado,last + 1));
+							last = (*posicion);
+							if(last != end)
+							{
+								listaPosiciones->agregar(posicion);
+								cout<<cantidad<<"["<<*(listaPosiciones->consultar(cantidad))<<"]";
+								cantidad++;
+							}
+						}
+					}
+					
+					if(cantidad == 0) //INDIVIDUO
+					{
+						nombre = nombres;
+						cout<<nombre;
+					}
+					else //FAMILIA
+					{
+						for(int j = 1; j <= cantidad; j++)
+						{
+							if(j == 1)
+							{
+								string aux = nombres.substr(0, *(listaPosiciones->consultar(j)) );
+								listaIntegrantes->agregar(&aux); //Primero
+							}
+							else
+							{
+								if(j == cantidad)
+								{
+									string aux = nombres.substr(*(listaPosiciones->consultar(j))); //Ultimo
+									listaIntegrantes->agregar(&aux);
+									cout<<*(listaIntegrantes->consultar(j));
+								}
+								else
+								{
+									string aux = nombres.substr( *(listaPosiciones->consultar(j)),
+																 *(listaPosiciones->consultar(j+1)) - *(listaPosiciones->consultar(j)));
+									listaIntegrantes->agregar(&aux);
+									cout<<*(listaIntegrantes->consultar(j));
+								}
+							}
+						}
+					}
+					cout<<endl;
+				}
+			}
+		}
+	}
 }
 
 void Menu::darAlta(Abb* _arbol)
@@ -104,7 +192,7 @@ void Menu::darAlta(Abb* _arbol)
 	string numTelefono = "00"+legajo;
 	if(tipo == 1)
 	{
-		string nombre ;
+		string nombre;
 		cout<<"Ingrese APELLIDO_NOMBRE: ";
 		cin>>nombre;
 		Individuo* _individuo = new Individuo(numTelefono,nombre);
@@ -112,10 +200,10 @@ void Menu::darAlta(Abb* _arbol)
 	}
 	else if(tipo == 2)
 	{
+		string* integrante = new string();
 		string continuar;
 		Familia* _familia = new Familia(numTelefono);
 		do{
-			string* integrante = new string();
 			cout << "Ingrese un miembro de tu familia APELLIDO_NOMBRE: ";
 			cin >> *integrante;
 			_familia->agregarIntegrantes(integrante);
