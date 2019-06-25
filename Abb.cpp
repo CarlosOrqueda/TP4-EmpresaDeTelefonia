@@ -13,7 +13,7 @@ Nodo<Cliente>* Abb::obtenerRaiz(){
 }
 
 void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
-    if(raiz == nullptr)
+    if(raiz == nullptr || (raiz->obtenerDerecha() == NULL && raiz->obtenerIzquierda() == NULL))
 	{
 		raiz = new Nodo<Cliente>(nuevoCliente);
     }
