@@ -8,7 +8,7 @@ Familia::Familia(string numero) :Cliente(numero)
 void Familia::mostrarIntegrantes()
 {
 	int tamanio = listaIndividuos->obtenerTamanio();
-	for (int i = 0; i < tamanio ; i++){
+	for (int i = 1; i <= tamanio ; i++){
 		string nombre = *(listaIndividuos->consultar(i));
 		cout << nombre << " ";
 	}
@@ -21,7 +21,7 @@ double Familia::obtenerPrecioFinal()
 	return precioFinal;
 }
 
-void Familia::agregarIntegrantes(string* _nombre){
+void Familia::agregarIntegrantes(string*_nombre){
 	listaIndividuos->agregar(_nombre);
 }
 

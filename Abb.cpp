@@ -13,10 +13,9 @@ Nodo<Cliente>* Abb::obtenerRaiz(){
 }
 
 void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
-    if(!arbol)
+    if(raiz == nullptr)
 	{
-        cout<<"vacio->Nueva Raiz-> ";
-		arbol = new Nodo<Cliente>(nuevoCliente);
+		raiz = new Nodo<Cliente>(nuevoCliente);
     }
     else
 	{
@@ -92,15 +91,12 @@ void Abb::eliminarArbol(Nodo<Cliente>* arbol) {
 
 void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     if(!arbol)
-	{
-		cout<<"Aun No Hay Clientes"<<endl;
 		return;
-	}
     inOrderMostrar(arbol->obtenerIzquierda());
-    cout << "******************************************************************************************************";
-    cout<<arbol->obtenerDato()->obtenerNumero()<<": ";
-    obtenerNombreCliente();
-    cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal();
+    cout << "******************************************************************************************************" << endl;
+    cout<<arbol->obtenerDato()->obtenerNumero()<<": "<<endl;
+    obtenerNombreCliente(arbol);
+    cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal()<< endl;
     inOrderMostrar(arbol->obtenerDerecha());
 }
 

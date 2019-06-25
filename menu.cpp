@@ -104,7 +104,7 @@ void Menu::darAlta(Abb* _arbol)
 	string numTelefono = "00"+legajo;
 	if(tipo == 1)
 	{
-		string nombre;
+		string nombre ;
 		cout<<"Ingrese APELLIDO_NOMBRE: ";
 		cin>>nombre;
 		Individuo* _individuo = new Individuo(numTelefono,nombre);
@@ -112,10 +112,10 @@ void Menu::darAlta(Abb* _arbol)
 	}
 	else if(tipo == 2)
 	{
-		string* integrante = new string();
 		string continuar;
 		Familia* _familia = new Familia(numTelefono);
 		do{
+			string* integrante = new string();
 			cout << "Ingrese un miembro de tu familia APELLIDO_NOMBRE: ";
 			cin >> *integrante;
 			_familia->agregarIntegrantes(integrante);
