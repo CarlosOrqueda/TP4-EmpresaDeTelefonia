@@ -21,7 +21,7 @@ class Menu
 		void eliminarCliente(Abb* _arbol);
 	public:
 		void mostrarMenu();
-		//void leerArchivo(Abb* _arbol);
+		void leerArchivo(Abb* _arbol);
 		void ejecutarOpcion(Abb* _arbol);
 
 		//Metodos setters/getters

@@ -35,7 +35,7 @@ void Menu::ejecutarOpcion(Abb* _arbol)
 	{
 		case 1:
 		{
-			//leerArchivo(_arbol);
+			leerArchivo(_arbol);
 			break;
 		}
 		case 2:
@@ -87,98 +87,57 @@ bool Menu::obtenerSalir()
 
 
 
- /* void Menu::leerArchivo(Abb* _arbol)
+ void Menu::leerArchivo(Abb* _arbol)
 {
 	string nombreArchivo;
-	cout << "Inserte Nombre Archivo: ";
-	cin >> nombreArchivo;
+  cout << "Inserte Nombre Archivo: ";
+  cin >> nombreArchivo;
 
-	ifstream listaClientes(nombreArchivo);
-	if (!listaClientes.is_open())
-	{
-		cout << "ERROR Archivo inexistente" << endl;
-	}
-	else
-	{
-		int cantidad = 0;	//CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
-		unsigned int end = 4294967295;
-		string numero;	//NUM. TEL.
-		string nombre;	//INDIVIDUO
-		string nombres;	//STRING DE DONDE SE EXTRAERAN LAS SUBSTR
-		Lista<size_t>* listaPosiciones = new Lista<size_t>;
-		Lista<string>* listaIntegrantes = new Lista<string>;
-		
-		while (listaClientes.good())
+  ifstream listaClientes(nombreArchivo);
+  if (!listaClientes.is_open())
+  {
+    cout << "ERROR Archivo inexistente" << endl;
+  }
+  else
+  {
+    string numero;  //NUM. TEL.
+    string nombre;  //INDIVIDUO
+    string nombres;  //STRING DE DONDE SE EXTRAERAN LAS SUBSTR
+    string buscado = ",";
+    
+    while (listaClientes.good())
+    {
+      if(getline(listaClientes,numero,','))
+      {
+		cout<<numero<<": ";
+		if(getline(listaClientes,nombres,'\n'))
 		{
-			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
+			Lista<string>* listaIntegrantes = new Lista<string>;
+			int cantidad = 0;  //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
+			
+			int start = 0;
+			int end = nombres.find(buscado,start);
+			
+			string sub = nombres.substr(start,end);
+			cantidad++;
+			
+			cout<<sub<<" ";
+			while(end != -1)
 			{
-				cout<<numero<<": ";
-				if(getline(listaClientes,nombres,'\n'))	//OBTENER NOMBRES TODOS EN UN SOLO STRING
-				{
-					string buscado = ",";
-					size_t* Prposicion = (nombres.find(buscado);
-					
-					if(*Prposicion != end ) //FAMILIA
-					{
-						listaPosiciones->agregar(Prposicion); //PRIMERA COMA
-						cantidad = 1;
-						cout<<cantidad<<"["<<*(listaPosiciones->consultar(cantidad))<<"]";
-						size_t* last = Prposicion;
-						
-						
-						//ACA EL PROBLEMA
-						while(*last != end) //OBTENER RESTO POSICIONES
-						{
-							size_t* posicion = new size_t(nombres.find(buscado,last + 1));
-							last = (*posicion);
-							if(*last != end)
-							{
-								listaPosiciones->agregar(posicion);
-								cout<<cantidad<<"["<<*(listaPosiciones->consultar(cantidad))<<"]";
-								cantidad++;
-							}
-						}
-					}
-					
-					if(cantidad == 0) //INDIVIDUO
-					{
-						nombre = nombres;
-						cout<<nombre;
-					}
-					else //FAMILIA
-					{
-						for(int j = 1; j <= cantidad; j++)
-						{
-							if(j == 1)
-							{
-								string aux = nombres.substr(0, *(listaPosiciones->consultar(j)) );
-								listaIntegrantes->agregar(&aux); //Primero
-							}
-							else
-							{
-								if(j == cantidad)
-								{
-									string aux = nombres.substr(*(listaPosiciones->consultar(j))); //Ultimo
-									listaIntegrantes->agregar(&aux);
-									cout<<*(listaIntegrantes->consultar(j));
-								}
-								else
-								{
-									string aux = nombres.substr( *(listaPosiciones->consultar(j)),
-																 *(listaPosiciones->consultar(j+1)) - *(listaPosiciones->consultar(j)));
-									listaIntegrantes->agregar(&aux);
-									cout<<*(listaIntegrantes->consultar(j));
-								}
-							}
-						}
-					}
-					cout<<endl;
-				}
+				start = end+1;
+				end = nombres.find(buscado,start);
+				sub = nombres.substr(start,end-start);
+				cantidad++;
+				
+				cout<<sub<<" ";
 			}
-		}
-	}
+        }
+        cout<<endl;
+      }
+    }
+  }
 }
-*/
+
 void Menu::darAlta(Abb* _arbol)
 {
 	string legajo;
