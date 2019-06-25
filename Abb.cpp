@@ -19,7 +19,7 @@ void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
     }
     else
 	{
-		if(nuevoCliente->obtenerNumero() < raiz->obtenerDato()->obtenerNumero())
+		if(nuevoCliente->obtenerNumero() < arbol->obtenerDato()->obtenerNumero())
 		{
             if(arbol->obtenerIzquierda() == nullptr)
 			{
@@ -29,7 +29,7 @@ void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
             else
                 insertar(arbol->obtenerIzquierda(),nuevoCliente);
         }
-        else if (nuevoCliente->obtenerNumero() > raiz->obtenerDato()->obtenerNumero())
+        else if (nuevoCliente->obtenerNumero() > arbol->obtenerDato()->obtenerNumero())
 		{
             if(arbol->obtenerDerecha() == nullptr)
 			{
