@@ -144,7 +144,7 @@ void Menu::darAlta(Abb* _arbol)
 	do{
 		cout<<"Ingrese un legajo: ";
 		cin>>legajo;
-	}while(legajo.length() != 6);
+	}while( (legajo.length() > 6) || (legajo.length() <= 0));
 	int tipo = 0;
 	cout<<"Que Tipo de Cliente Desea Ingresar?"<<endl;
 	while((tipo != 1)&&(tipo != 2))
@@ -152,7 +152,14 @@ void Menu::darAlta(Abb* _arbol)
 		cout<<"Individuo[1] - Familia[2]: "<<endl;
 		cin>>tipo;
 	}
-	string numTelefono = "00"+legajo;
+	size_t digitosSize = legajo.size();
+	int digitos = static_cast<int>(digitosSize);
+	int ceros = 8-digitos;
+	
+	string numTelefono = legajo;
+	for(int i = 0; i<ceros; i++)
+		numTelefono = "0"+numTelefono;
+	
 	if(tipo == 1)
 	{
 		string nombre;
