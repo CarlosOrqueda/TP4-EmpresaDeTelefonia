@@ -129,9 +129,9 @@ void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
 }
 
 void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
-    if(!arbol)
+    if(raiz == nullptr)
 	{
-		cout<<"Aun No Hay Clientes"<<endl;
+		cout<<"No Hay Clientes"<<endl;
 		return;
 	}
     inOrderBuscar(arbol->obtenerIzquierda(), numero);
@@ -217,6 +217,7 @@ void Abb::destruirNodo(Nodo<Cliente>* nodo)
     nodo->asignarIzquierda(NULL);
     delete nodo;
 }
+
 Abb::~Abb() {
     eliminarArbol();
 }
