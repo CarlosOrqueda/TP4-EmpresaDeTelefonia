@@ -93,9 +93,13 @@ void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     if(!arbol)
 		return;
     inOrderMostrar(arbol->obtenerIzquierda());
-    cout << "******************************************************************************************************" << endl;
-    cout<<arbol->obtenerDato()->obtenerNumero()<<": "<<endl;
-    obtenerNombreCliente(arbol);
+    if(raiz->obtenerDato() == nullptr)
+        cout<<"Arbol vacio"<<endl;
+    else{
+        cout << "******************************************************************************************************" << endl;
+        cout<<arbol->obtenerDato()->obtenerNumero()<<": "<<endl;
+        obtenerNombreCliente(arbol);
+    }
     cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal()<< endl;
     inOrderMostrar(arbol->obtenerDerecha());
 }
