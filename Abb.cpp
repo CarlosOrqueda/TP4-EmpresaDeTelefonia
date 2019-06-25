@@ -90,6 +90,17 @@ void Abb::eliminarArbol(Nodo<Cliente>* arbol) {
 }
 
 void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
+    if(!arbol || raiz->obtenerDato() == nullptr) // esto se fija si el dato de raiz es nullo 
+		return;
+    inOrderMostrar(arbol->obtenerIzquierda());
+    cout << "******************************************************************************************************" << endl;
+    cout<<arbol->obtenerDato()->obtenerNumero()<<": "<<endl;
+    obtenerNombreCliente(arbol);
+    cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal()<< endl;
+    inOrderMostrar(arbol->obtenerDerecha());
+}
+
+/* void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     if(!arbol)
 		return;
     inOrderMostrar(arbol->obtenerIzquierda());
@@ -99,11 +110,11 @@ void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
         cout << "******************************************************************************************************" << endl;
         cout<<arbol->obtenerDato()->obtenerNumero()<<": "<<endl;
         obtenerNombreCliente(arbol);
+        cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal()<< endl;
     }
-    cout<<"El Precio final es: "<<arbol->obtenerDato()->obtenerPrecioFinal()<< endl;
     inOrderMostrar(arbol->obtenerDerecha());
 }
-
+*/
 void Abb::preOrder(Nodo<Cliente>* arbol){
     if(!arbol)
         return;
@@ -133,7 +144,7 @@ void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
 }
 
 void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
-    if(raiz == nullptr)
+    if(raiz == nullptr || raiz->obtenerDato() == nullptr)
 	{
 		cout<<"No Hay Clientes"<<endl;
 		return;
