@@ -168,17 +168,21 @@ void Menu::leerArchivo(Abb *_arbol){
 		cout << "ERROR Archivo Inexistente" << endl;
 		return;
 	}
-	string numero, lineaNombres, nombre;
+	string numero, lineaNombres, nombre, ultimoNombre;
 	while (archivoClientes.good()){
 		getline(archivoClientes, numero, ',');
 		getline(archivoClientes, lineaNombres);
+		if (!lineaNombres.empty() && lineaNombres[lineaNombres.size() - 1] == '\r')
+    		lineaNombres.erase(lineaNombres.size() - 1);
 		if (lineaNombres.find(',') != string::npos){
 			stringstream ss(lineaNombres);
 			Familia *_familia = new Familia(numero);
-			while(getline(ss, nombre, ',')){
+			while(ss.good()){
+				getline(ss, nombre, ',');
 				string *nombreIntegrante = new string();
 				*nombreIntegrante = nombre;
 				_familia->agregarIntegrantes(nombreIntegrante);
+				cout << nombre << endl;
 			}
 			_arbol->insertar(_familia);
 		}
