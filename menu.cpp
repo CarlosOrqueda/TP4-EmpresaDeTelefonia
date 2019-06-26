@@ -109,7 +109,7 @@ void Menu::leerArchivo(Abb *_arbol)
 			{
 				if (getline(listaClientes, nombres, '\n'))
 				{
-					Lista<string> *listaIntegrantes = new Lista<string>;
+					//Lista<string> *listaIntegrantes = new Lista<string>;
 					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
 
 					int start = 0;
@@ -126,12 +126,34 @@ void Menu::leerArchivo(Abb *_arbol)
 					else if(end != -1) //ES UNA FAMILIA
 					{
 						Familia *_familia = new Familia(numero);
-						
-						string *primerIntegrante = new string(); //SE CARGA EL PRIMER INTEGRANTE
-						*primerIntegrante = sub;
-						_familia->agregarIntegrantes(primerIntegrante);
-						
-						while (end != -1) //MIENTRAS LEA UNA ','
+						do
+						{
+							string *primerIntegrante = new string(); //SE CARGA EL PRIMER INTEGRANTE
+							*primerIntegrante = sub;
+							_familia->agregarIntegrantes(primerIntegrante);
+							start = end + 1;
+							end = nombres.find(buscado, start);
+
+							if(end == -1) //ES EL ULTIMO INTEGRANTE
+							{
+								sub = nombres.substr(start);
+								string *ultimoIntegrante = new string();
+								*ultimoIntegrante = sub;
+								_familia->agregarIntegrantes(ultimoIntegrante);
+								cantidad++;
+							}
+							else //ES UN INTEGRANTE N
+							{
+								sub = nombres.substr(start, end -start);
+								string *integrante = new string();
+								*integrante = sub;
+								_familia->agregarIntegrantes(integrante);
+								cantidad++;
+							}
+
+						} while (end != -1);
+
+						/* while (end != -1) //MIENTRAS LEA UNA ','
 						{
 							start = end + 1;
 							end = nombres.find(buscado, start);
@@ -155,7 +177,10 @@ void Menu::leerArchivo(Abb *_arbol)
 								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
-						}
+						}*/
+
+
+						_arbol->insertar(_familia);
 						cout<<_familia->obtenerNumero()<<": ";
 						_familia->mostrarIntegrantes();
 						cout << endl;
