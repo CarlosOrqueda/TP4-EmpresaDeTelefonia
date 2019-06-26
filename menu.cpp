@@ -127,28 +127,26 @@ void Menu::leerArchivo(Abb *_arbol)
 					else if(end != -1) //ES UNA FAMILIA
 					{
 						Familia *_familia = new Familia(numero);
-						do
+						_familia->agregarIntegrantes(sub);
+						while( end != -1)
 						{
-							_familia->agregarIntegrantes(sub);
-							start = end + 1;
+							start = end+1;
 							end = nombres.find(buscado, start);
-
 							if(end == -1) //ES EL ULTIMO INTEGRANTE
 							{
-								string *integrante = new string();
+								string* integrante = new string();
 								*integrante = nombres.substr(start);
 								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
 							else //ES UN INTEGRANTE N
 							{
-								string *integrante = new string();
+								string* integrante = new string();
 								*integrante = nombres.substr(start, end -start);
 								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
-
-						} while (end != -1);
+						}
 						_arbol->insertar(_familia);
 					}
 				}
