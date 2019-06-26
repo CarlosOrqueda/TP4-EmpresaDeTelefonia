@@ -1,6 +1,7 @@
 #include "menu.hpp"
 #include <iostream>
 #include <string>
+#include <istream>
 using namespace std;
 
 void Menu::mostrarMenu()
@@ -9,61 +10,65 @@ void Menu::mostrarMenu()
 	bool invalido = true;
 	while (invalido)
 	{
-		cout <<"[ MENU PRINCIPAL ]" << endl;
-		cout<<"1- Cargar Archivo de Clientes (.csv)."<<endl;
-		cout<<"2- Dar Alta Cliente Nuevo."<<endl;
-		cout<<"3- Listar Clientes."<<endl;
-		cout<<"4- Buscar Cliente(POR NUM)."<<endl;
-		cout<<"5- SALIR"<<endl;
-		cout <<"------------------" << endl;
-		cout<<"ELECCION: ";
+		cout << "[ MENU PRINCIPAL ]" << endl;
+		cout << "1- Cargar Archivo de Clientes (.csv)." << endl;
+		cout << "2- Dar Alta Cliente Nuevo." << endl;
+		cout << "3- Listar Clientes." << endl;
+		cout << "4- Buscar Cliente(POR NUM)." << endl;
+		cout << "5- Eliminar Cliente(POR NUM)." << endl;
+		cout << "6- SALIR" << endl;
+		cout << "------------------" << endl;
+		cout << "ELECCION: ";
 		cin >> opcionElegida;
-		if(opcionElegida > 0 && opcionElegida <= 5)
+		if (opcionElegida > 0 && opcionElegida <= 5)
 		{
 			invalido = false;
 			ingresarOpcion(opcionElegida);
 		}
 		else
-			cout<<"[Opcion Invalida]"<<endl;
+			cout << "[Opcion Invalida]" << endl;
 	}
 }
-void Menu::ejecutarOpcion(Abb* _arbol)
+void Menu::ejecutarOpcion(Abb *_arbol)
 {
 	switch (obtenerOpcion())
 	{
-		case 1:
-		{
-			cargarArchivo(_arbol);
-			break;
-		}
-		case 2:
-		{
-			darAlta(_arbol);
-			break;
-		}
-		case 3:
-		{
-			listarClientes(_arbol);
-			break;
-		}
-		case 4:
-		{
-			/*buscarCliente(_arbol);
-			cout<<"1- Calcular Precio Final por Abonar."<<endl;
-			cout<<"2- Dar de Baja al Cliente."<<endl;*/
-			break;
-		}	
-		case 5:
-		{
-			salir = true;
-			break;
-		}
-		default:
-			break;
-	}
-	if(!salir)
+	case 1:
 	{
-		cout << "Continuar? [SI: 0] | [NO: 1] "<<endl;
+		leerArchivo(_arbol);
+		break;
+	}
+	case 2:
+	{
+		darAlta(_arbol);
+		break;
+	}
+	case 3:
+	{
+		listarClientes(_arbol);
+		break;
+	}
+	case 4:
+	{
+		buscarCliente(_arbol);
+		break;
+	}
+	case 5:
+	{
+		eliminarCliente(_arbol);
+		break;
+	}
+	case 6:
+	{
+		salir = true;
+		break;
+	}
+	default:
+		break;
+	}
+	if (!salir)
+	{
+		cout << "Continuar? [SI: 0] | [NO: 1] " << endl;
 		cin >> salir;
 	}
 }
@@ -80,9 +85,7 @@ bool Menu::obtenerSalir()
 	return salir;
 }
 
-
-
-void Menu::cargarArchivo(Abb* _arbol)
+void Menu::leerArchivo(Abb *_arbol)
 {
 	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
@@ -95,138 +98,168 @@ void Menu::cargarArchivo(Abb* _arbol)
 	}
 	else
 	{
-		string numero;
+		string numero;  //NUM. TEL.
+		string nombres; //STRING DE DONDE SE EXTRAERAN LAS SUBSTR
+		string buscado = ",";
 		
-		int i;
-		string listaNombres;
-		size_t posiciones[5];
-		string nombre;//INDV
-		string nombres[5];//FLIA
-		
+
 		while (listaClientes.good())
 		{
-			i = 1;
-			if(getline(listaClientes,numero,','))	//OBTENER NUMERO
+			if (getline(listaClientes, numero, ','))
 			{
-				if(getline(listaClientes,listaNombres,'\n'))	//OBTENER NOMBRES
+				if (getline(listaClientes, nombres, '\n'))
 				{
-					string busco = ",";
-					size_t pos = listaNombres.find(busco);
-					while( pos != std::string::npos) //OBTENER POSICIONES
+					//Lista<string> *listaIntegrantes = new Lista<string>;
+					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
+
+					int start = 0;
+					string *sub = new string();
+					int end = nombres.find(buscado, start);
+
+					*sub = nombres.substr(start, end);
+					cantidad++;
+
+					if(end == -1) //ES UN INDIVIDUO
 					{
-						posiciones[i] = pos;
-						pos = listaNombres.find(busco, pos + 1);
-						i++;
+						Individuo *_individuo = new Individuo(numero, nombres);
+						_arbol->insertar(_individuo);
 					}
-					if(i == 1) //INDIVIDUO
+					else if(end != -1) //ES UNA FAMILIA
 					{
-						nombre = listaNombres.substr(0,posiciones[1]);
-					}
-					else //FAMILIA
-					{
-						for(int j = 0; j < i; j++) //OBTENER SUBSTRINGS
+						Familia *_familia = new Familia(numero);
+						do
 						{
-							if(j == 0)
-								nombres[j] = listaNombres.substr(0,posiciones[j+1]); //Primero
-							else
+							_familia->agregarIntegrantes(sub);
+							start = end + 1;
+							end = nombres.find(buscado, start);
+
+							if(end == -1) //ES EL ULTIMO INTEGRANTE
 							{
-								if(j == i-1)
-									nombres[j] = listaNombres.substr(posiciones[j]+1); //Ultimo
-								else
-									nombres[j] = listaNombres.substr(posiciones[j]+1, (posiciones[j+1])-(posiciones[j]+1));
+								string *integrante = new string();
+								*integrante = nombres.substr(start);
+								_familia->agregarIntegrantes(integrante);
+								cantidad++;
 							}
-						}
+							else //ES UN INTEGRANTE N
+							{
+								string *integrante = new string();
+								*integrante = nombres.substr(start, end -start);
+								_familia->agregarIntegrantes(integrante);
+								cantidad++;
+							}
+
+						} while (end != -1);
+
+						/* while (end != -1) //MIENTRAS LEA UNA ','
+						{
+							start = end + 1;
+							end = nombres.find(buscado, start);
+							
+							//ESTA SEPARACION ENTRE ULTIMO Y N NO HACE NADA, PERO LA DE PRIMER INTEGRANTE SI ES IMPORTANTE DEJARLA
+							//DE LO CONTRARIO NO SE CARGA EL INTEGRANTE QUE SE LEYO ANTES DE COMPROBAR QUE TIPO DE CLIENTE ES
+							
+							if(end == -1) //ES EL ULTIMO INTEGRANTE
+							{
+								sub = nombres.substr(start);
+								string *ultimoIntegrante = new string();
+								*ultimoIntegrante = sub;
+								_familia->agregarIntegrantes(ultimoIntegrante);
+								cantidad++;
+							}
+							else //ES UN INTEGRANTE N
+							{
+								sub = nombres.substr(start, end -start);
+								string *integrante = new string();
+								*integrante = sub;
+								_familia->agregarIntegrantes(integrante);
+								cantidad++;
+							}
+						}*/
+
+
+						_arbol->insertar(_familia);
+						cout<<_familia->obtenerNumero()<<": ";
+						_familia->mostrarIntegrantes();
+						cout << endl;
 					}
-				}
-				if(i == 1)
-				{
-					Individuo* _individuo = new Individuo(numero,nombre);
-					_arbol->insertar(_individuo);
-				}
-				else
-				{
-					//Familia* _familia = new Familia(numero,nombres,i);
-					//_arbol->insertar(_familia);
 				}
 			}
 		}
 	}
 }
 
-void Menu::darAlta(Abb* _arbol)
+void Menu::darAlta(Abb *_arbol)
 {
 	string legajo;
-	cout<<"Ingrese un legajo: ";
-	cin>>legajo;
-	
+	do
+	{
+		cout << "Ingrese un legajo: ";
+		cin >> legajo;
+	} while ((legajo.length() > 6) || (legajo.length() <= 0));
 	int tipo = 0;
-	cout<<"Que Tipo de Cliente Desea Ingresar?"<<endl;
-	while((tipo != 1)&&(tipo != 2))
+	cout << "Que Tipo de Cliente Desea Ingresar?" << endl;
+	while ((tipo != 1) && (tipo != 2))
 	{
-		cout<<"Individuo[1] - Familia[2]: "<<endl;
-		cin>>tipo;
+		cout << "Individuo[1] - Familia[2]: " << endl;
+		cin >> tipo;
 	}
-	
-	string ceros = "";
-	int cant = 8-(legajo.size());
-	for(int i = 0; i<cant; i++)
-	{
-		ceros = ceros+"0";
-	}
-	
-	string numTel = ceros+legajo;
-	
-	if(tipo == 1)
+	size_t digitosSize = legajo.size();
+	int digitos = static_cast<int>(digitosSize);
+	int ceros = 8 - digitos;
+
+	string numTelefono = legajo;
+	for (int i = 0; i < ceros; i++)
+		numTelefono = "0" + numTelefono;
+
+	if (tipo == 1)
 	{
 		string nombre;
-		cout<<"Ingrese APELLIDO_NOMBRE: ";
-		cin>>nombre;
-		Individuo* _individuo = new Individuo(numTel,nombre);
+		cout << "Ingrese APELLIDO_NOMBRE: ";
+		cin >> nombre;
+		Individuo *_individuo = new Individuo(numTelefono, nombre);
 		_arbol->insertar(_individuo);
 	}
-	else if(tipo == 2)
+	else if (tipo == 2)
 	{
-		bool valido = false;
-		int cant = 0;
-		while(!valido)
+		string continuar;
+		Familia *_familia = new Familia(numTelefono);
+		do
 		{
-			cout<<"Ingrese la cantidad de I¿ntegrantes(MIN 1/MAX 10): ";
-			cin>>cant;
-			valido = ((cant>0)&&(cant<=10));
-		}
-		string famNombres[10];
-		
-		for(int i = 0; i<cant; i++)
-		{
-			cout<<"Ingrese APELLIDO_NOMBRE: ";
-			cin>>famNombres[i];
-		}
-		Familia* _familia = new Familia(numTel,famNombres,cant);
+			string *integrante = new string();
+			cout << "Ingrese un miembro de tu familia APELLIDO_NOMBRE: ";
+			cin >> *integrante;
+			_familia->agregarIntegrantes(integrante);
+			cout << "Desea seguir ingresando familiares?[si/no]:";
+			cin >> continuar;
+		} while (continuar == "si");
+
 		_arbol->insertar(_familia);
 	}
 }
 
-void Menu::listarClientes(Abb* _arbol)
+void Menu::listarClientes(Abb *_arbol)
 {
 	_arbol->inOrderMostrar();
 }
 
-void Menu::buscarCliente(Abb* _arbol)
+void Menu::buscarCliente(Abb *_arbol)
 {
 	string numero;
-	do{
-	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
-	cin >> numero;
-	}while(numero.length() != 8);
-	_arbol->inOrderBuscar(numero);
+	do
+	{
+		cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
+		cin >> numero;
+	} while (numero.length() != 8);
+	_arbol->postOrderBuscar(numero);
 }
 
-void Menu::eliminarCliente(Abb* _arbol)
+void Menu::eliminarCliente(Abb *_arbol)
 {
 	string numero;
-	do{
-	cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
-	cin >> numero;
-	}while(numero.length() != 8);
+	do
+	{
+		cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
+		cin >> numero;
+	} while (numero.length() != 8);
 	_arbol->eliminar(numero);
 }

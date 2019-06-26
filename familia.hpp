@@ -3,19 +3,19 @@
 
 #include "cliente.hpp"
 #include "individuo.hpp"
-const int MAX_INDIVIDUOS = 10;
+#include "lista.hpp"
 class Familia: public Cliente
 {
 	private:
-			int tope;
-			string integrantes[MAX_INDIVIDUOS];
+			Lista<string>* listaIndividuos; 
 	public:
 			Familia(string numero);
-			Familia(string numero,string _nombres[],int _tam);
 			
-			string obtenerIntegrante(int pos);
+			void mostrarIntegrantes();
 			
 			double obtenerPrecioFinal();
+
+			void agregarIntegrantes(string* _nombre); // usen esto con el cargarArchivo Recibe un PUNTERO a un string 
 			
 			~Familia();
 };
