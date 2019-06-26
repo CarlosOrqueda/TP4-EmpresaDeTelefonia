@@ -16,9 +16,11 @@ class Nodo
 
 	public:
 
+		//CONSTRUCTORES
 		Nodo<Dato>();
 		Nodo<Dato>(Dato* _dato);
 		Nodo<Dato>(Dato* _dato, Nodo* _izquierda, Nodo* _derecha);
+		//SETTERS/GETTERS
 		void asignarDato(Dato* _dato);
 		void asignarIzquierda(Nodo* izquierda);
 		void asignarDerecha(Nodo* derecha);

@@ -9,6 +9,9 @@ class Abonable
 	protected:
 		double precioBase = 323.44;
 	public:
+		/*CALCULA EL PRECIO FINAL POR ABONAR
+		 * PRE: -
+		 * POST: Aplica el descuento al precio base.*/
 		virtual double obtenerPrecioFinal() = 0;
 };
 

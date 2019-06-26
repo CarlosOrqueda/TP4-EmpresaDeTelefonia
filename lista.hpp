@@ -12,9 +12,9 @@ class Lista
 		NodoLista<Dato>* head;
 		//Tamanio de la lista
 		int tamanio;
-		//Obtener nodo en una posicion
-		//PRE: Debe de existir un nodo
-		//POST: Devuelve el nodo en una posicion
+		/*Obtener nodo en una posicion
+		 * PRE: Debe de existir un nodo
+		 * POST: Devuelve el nodo en una posicion*/
 		NodoLista<Dato>* obtenerNodo(int posicion);
 
 	public:

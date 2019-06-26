@@ -9,15 +9,16 @@ class Familia: public Cliente
 	private:
 			Lista<string>* listaIndividuos; 
 	public:
-			Familia(string numero);
-			
-			void mostrarIntegrantes();
-			
-			double obtenerPrecioFinal();
-
-			void agregarIntegrantes(string* _nombre); // usen esto con el cargarArchivo Recibe un PUNTERO a un string 
-			
-			~Familia();
+		//Constructor	
+		Familia(string numero);
+		//Muestra por pantalla los integrantes de la familia			
+		void mostrarIntegrantes();
+		//Devuelve el precio final a pagar.	
+		double obtenerPrecioFinal();
+		//Agrega un integrante nuevo.
+		void agregarIntegrantes(string* _nombre);
+		//Destructor	
+		~Familia();
 };
 
 #endif

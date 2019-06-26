@@ -9,10 +9,12 @@ class Cliente : public Abonable
 	protected:
 			string numeroTelefono;
 	public:
-            Cliente(string _numero);
+            //CONSTRUCTOR
+			Cliente(string _numero);
+			//SETTERS/GETTERS
 			void asignarNumero(string _numero);
 			string obtenerNumero();
-			
+			//DESTRUCTOR
 			virtual ~Cliente();
 };
 
