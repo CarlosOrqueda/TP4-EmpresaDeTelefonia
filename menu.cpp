@@ -143,7 +143,7 @@ void Menu::leerArchivo(Abb *_arbol)
 							else //ES UN INTEGRANTE N
 							{
 								string *integrante = new string();
-								*integrante = nombres.substr(start);
+								*integrante = nombres.substr(start, end -start);
 								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
