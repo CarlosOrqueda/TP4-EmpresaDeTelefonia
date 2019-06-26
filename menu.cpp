@@ -149,38 +149,7 @@ void Menu::leerArchivo(Abb *_arbol)
 							}
 
 						} while (end != -1);
-
-						/* while (end != -1) //MIENTRAS LEA UNA ','
-						{
-							start = end + 1;
-							end = nombres.find(buscado, start);
-							
-							//ESTA SEPARACION ENTRE ULTIMO Y N NO HACE NADA, PERO LA DE PRIMER INTEGRANTE SI ES IMPORTANTE DEJARLA
-							//DE LO CONTRARIO NO SE CARGA EL INTEGRANTE QUE SE LEYO ANTES DE COMPROBAR QUE TIPO DE CLIENTE ES
-							
-							if(end == -1) //ES EL ULTIMO INTEGRANTE
-							{
-								sub = nombres.substr(start);
-								string *ultimoIntegrante = new string();
-								*ultimoIntegrante = sub;
-								_familia->agregarIntegrantes(ultimoIntegrante);
-								cantidad++;
-							}
-							else //ES UN INTEGRANTE N
-							{
-								sub = nombres.substr(start, end -start);
-								string *integrante = new string();
-								*integrante = sub;
-								_familia->agregarIntegrantes(integrante);
-								cantidad++;
-							}
-						}*/
-
-
 						_arbol->insertar(_familia);
-						cout<<_familia->obtenerNumero()<<": ";
-						_familia->mostrarIntegrantes();
-						cout << endl;
 					}
 				}
 			}
