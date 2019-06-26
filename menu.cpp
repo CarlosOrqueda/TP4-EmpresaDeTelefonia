@@ -1,7 +1,8 @@
 #include "menu.hpp"
 #include <iostream>
 #include <string>
-#include <istream>
+#include <fstream>
+#include <sstream>
 using namespace std;
 
 void Menu::mostrarMenu()
@@ -85,14 +86,14 @@ bool Menu::obtenerSalir()
 	return salir;
 }
 
-void Menu::leerArchivo(Abb *_arbol)
+/* void Menu::leerArchivo(Abb *_arbol)
 {
 	string nombreArchivo;
 	cout << "Inserte Nombre Archivo: ";
 	cin >> nombreArchivo;
 
-	ifstream listaClientes(nombreArchivo);
-	if (!listaClientes.is_open())
+	ifstream archivoClientes(nombreArchivo);
+	if (!archivoClientes.is_open())
 	{
 		cout << "ERROR Archivo inexistente" << endl;
 	}
@@ -103,11 +104,11 @@ void Menu::leerArchivo(Abb *_arbol)
 		string buscado = ",";
 		
 
-		while (listaClientes.good())
+		while (archivoClientes.good())
 		{
-			if (getline(listaClientes, numero, ','))
+			if (getline(archivoClientes, numero, ','))
 			{
-				if (getline(listaClientes, nombres, '\n'))
+				if (getline(archivoClientes, nombres, '\n'))
 				{
 					//Lista<string> *listaIntegrantes = new Lista<string>;
 					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
@@ -155,6 +156,37 @@ void Menu::leerArchivo(Abb *_arbol)
 			}
 		}
 	}
+}
+*/
+void Menu::leerArchivo(Abb *_arbol){
+	string nombreArchivo;
+	cout << "Ingrese el nombre del archivo (csv): ";
+	cin >> nombreArchivo;
+
+	ifstream archivoClientes(nombreArchivo);
+	if (!archivoClientes.is_open()){
+		cout << "ERROR Archivo Inexistente" << endl;
+		return;
+	}
+	string numero, lineaNombres, nombre;
+	while (archivoClientes.good()){
+		getline(archivoClientes, numero, ',');
+		getline(archivoClientes, lineaNombres);
+		if (lineaNombres.find(',') != string::npos){
+			stringstream ss(lineaNombres);
+			Familia *_familia = new Familia(numero);
+			while(getline(ss, nombre, ',')){
+				string *nombreIntegrante = new string();
+				*nombreIntegrante = nombre;
+				_familia->agregarIntegrantes(nombreIntegrante);
+			}
+			_arbol->insertar(_familia);
+		}
+		else{
+			Individuo *_individuo = new Individuo(numero,lineaNombres);
+			_arbol -> insertar(_individuo);
+		}
+	}	
 }
 
 void Menu::darAlta(Abb *_arbol)
