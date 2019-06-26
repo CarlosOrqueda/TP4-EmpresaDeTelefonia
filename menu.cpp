@@ -113,9 +113,10 @@ void Menu::leerArchivo(Abb *_arbol)
 					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
 
 					int start = 0;
+					string *sub = new string();
 					int end = nombres.find(buscado, start);
 
-					string sub = nombres.substr(start, end);
+					*sub = nombres.substr(start, end);
 					cantidad++;
 
 					if(end == -1) //ES UN INDIVIDUO
@@ -128,26 +129,20 @@ void Menu::leerArchivo(Abb *_arbol)
 						Familia *_familia = new Familia(numero);
 						do
 						{
-							string *primerIntegrante = new string(); //SE CARGA EL PRIMER INTEGRANTE
-							*primerIntegrante = sub;
-							_familia->agregarIntegrantes(primerIntegrante);
+							_familia->agregarIntegrantes(sub);
 							start = end + 1;
 							end = nombres.find(buscado, start);
 
 							if(end == -1) //ES EL ULTIMO INTEGRANTE
 							{
-								sub = nombres.substr(start);
-								string *ultimoIntegrante = new string();
-								*ultimoIntegrante = sub;
-								_familia->agregarIntegrantes(ultimoIntegrante);
+								*sub = nombres.substr(start);
+								_familia->agregarIntegrantes(sub);
 								cantidad++;
 							}
 							else //ES UN INTEGRANTE N
 							{
-								sub = nombres.substr(start, end -start);
-								string *integrante = new string();
-								*integrante = sub;
-								_familia->agregarIntegrantes(integrante);
+								*sub = nombres.substr(start, end -start);
+								_familia->agregarIntegrantes(sub);
 								cantidad++;
 							}
 
