@@ -99,7 +99,6 @@ void Menu::leerArchivo(Abb *_arbol)
 	else
 	{
 		string numero;  //NUM. TEL.
-		string nombre;  //INDIVIDUO
 		string nombres; //STRING DE DONDE SE EXTRAERAN LAS SUBSTR
 		string buscado = ",";
 		
@@ -108,12 +107,9 @@ void Menu::leerArchivo(Abb *_arbol)
 		{
 			if (getline(listaClientes, numero, ','))
 			{
-				cout << numero << ": ";
-				
-				
 				if (getline(listaClientes, nombres, '\n'))
 				{
-					//Lista<string> *listaIntegrantes = new Lista<string>;
+					Lista<string> *listaIntegrantes = new Lista<string>;
 					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
 
 					int start = 0;
@@ -122,30 +118,49 @@ void Menu::leerArchivo(Abb *_arbol)
 					string sub = nombres.substr(start, end);
 					cantidad++;
 
-					cout << sub << " ";
-					if(end == -1)
+					if(end == -1) //ES UN INDIVIDUO
 					{
-						Individuo *_individuo = new Individuo(numero, nombre);
+						Individuo *_individuo = new Individuo(numero, nombres);
 						_arbol->insertar(_individuo);
 					}
-					else if(end != -1)
+					else if(end != -1) //ES UNA FAMILIA
 					{
 						Familia *_familia = new Familia(numero);
-						while (end != -1)
+						
+						string *primerIntegrante = new string(); //SE CARGA EL PRIMER INTEGRANTE
+						*primerIntegrante = sub;
+						_familia->agregarIntegrantes(primerIntegrante);
+						
+						while (end != -1) //MIENTRAS LEA UNA ','
 						{
 							start = end + 1;
 							end = nombres.find(buscado, start);
-							sub = nombres.substr(start, end - start);
-							string *integrante = new string();
-							*integrante = sub;
-							_familia->agregarIntegrantes(integrante);
-							cantidad++;
-							cout << sub << " ";
+							
+							//ESTA SEPARACION ENTRE ULTIMO Y N NO HACE NADA, PERO LA DE PRIMER INTEGRANTE SI ES IMPORTANTE DEJARLA
+							//DE LO CONTRARIO NO SE CARGA EL INTEGRANTE QUE SE LEYO ANTES DE COMPROBAR QUE TIPO DE CLIENTE ES
+							
+							if(end == -1) //ES EL ULTIMO INTEGRANTE
+							{
+								sub = nombres.substr(start);
+								string *ultimoIntegrante = new string();
+								*ultimoIntegrante = sub;
+								_familia->agregarIntegrantes(ultimoIntegrante);
+								cantidad++;
+							}
+							else //ES UN INTEGRANTE N
+							{
+								sub = nombres.substr(start, end -start);
+								string *integrante = new string();
+								*integrante = sub;
+								_familia->agregarIntegrantes(integrante);
+								cantidad++;
+							}
 						}
+						cout<<_familia->obtenerNumero()<<": ";
+						_familia->mostrarIntegrantes();
+						cout << endl;
 					}
-					
 				}
-				cout << endl;
 			}
 		}
 	}
