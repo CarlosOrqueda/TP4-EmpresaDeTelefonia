@@ -135,14 +135,16 @@ void Menu::leerArchivo(Abb *_arbol)
 
 							if(end == -1) //ES EL ULTIMO INTEGRANTE
 							{
-								*sub = nombres.substr(start);
-								_familia->agregarIntegrantes(sub);
+								string *integrante = new string();
+								*integrante = nombres.substr(start);
+								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
 							else //ES UN INTEGRANTE N
 							{
-								*sub = nombres.substr(start, end -start);
-								_familia->agregarIntegrantes(sub);
+								string *integrante = new string();
+								*integrante = nombres.substr(start);
+								_familia->agregarIntegrantes(integrante);
 								cantidad++;
 							}
 
