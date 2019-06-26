@@ -113,7 +113,7 @@ void Menu::leerArchivo(Abb *_arbol)
 				
 				if (getline(listaClientes, nombres, '\n'))
 				{
-					Lista<string> *listaIntegrantes = new Lista<string>;
+					//Lista<string> *listaIntegrantes = new Lista<string>;
 					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
 
 					int start = 0;
@@ -213,7 +213,7 @@ void Menu::buscarCliente(Abb *_arbol)
 		cout << "Ingresar el numero de 8 digitos del cliente buscado" << endl;
 		cin >> numero;
 	} while (numero.length() != 8);
-	_arbol->inOrderBuscar(numero);
+	_arbol->postOrderBuscar(numero);
 }
 
 void Menu::eliminarCliente(Abb *_arbol)

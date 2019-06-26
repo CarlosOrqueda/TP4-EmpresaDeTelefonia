@@ -13,7 +13,7 @@ Nodo<Cliente>* Abb::obtenerRaiz(){
 }
 
 void Abb::insertar(Nodo<Cliente>* arbol,Cliente* nuevoCliente) {
-    if(raiz == nullptr || (raiz->obtenerDerecha() == NULL && raiz->obtenerIzquierda() == NULL))
+    if(arbol == nullptr)
 	{
 		raiz = new Nodo<Cliente>(nuevoCliente);
     }
@@ -114,21 +114,32 @@ void  Abb::inOrderMostrar(Nodo<Cliente> *arbol) {
     }
     inOrderMostrar(arbol->obtenerDerecha());
 }
-*/
+
 void Abb::preOrder(Nodo<Cliente>* arbol){
     if(!arbol)
         return;
     cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
     postOrder(arbol->obtenerIzquierda());
     postOrder(arbol->obtenerDerecha());
-}
+}*/
 
-void Abb::postOrder(Nodo<Cliente> *arbol) {
-    if(!arbol)
+void Abb::postOrderBuscar(Nodo<Cliente> *arbol,  string numero) {
+    if(arbol == nullptr || raiz->obtenerDato() == nullptr)
         return;
-    postOrder(arbol->obtenerIzquierda());
-    postOrder(arbol->obtenerDerecha());
-    cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
+    postOrderBuscar(arbol->obtenerIzquierda(),numero);
+    postOrderBuscar(arbol->obtenerDerecha(),numero);
+    if(numero == arbol->obtenerDato()->obtenerNumero())
+    {
+        cout<<arbol->obtenerDato()->obtenerNumero()<<endl;
+		Familia* clienteFamilia = dynamic_cast<Familia*> (arbol->obtenerDato());
+    	Individuo* clienteIndividuo = dynamic_cast<Individuo*> (arbol->obtenerDato());
+    	if(clienteFamilia)
+        	clienteFamilia->mostrarIntegrantes();
+    	if(clienteIndividuo){
+        	cout<<clienteIndividuo->obtenerNombre()<<endl;
+		}
+		cout<<(arbol->obtenerDato()->obtenerPrecioFinal())<<endl;
+    }
 }
 
 void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
@@ -144,9 +155,8 @@ void Abb::obtenerNombreCliente(Nodo<Cliente>* arbol)
 }
 
 void Abb::inOrderBuscar(Nodo<Cliente>* arbol, string numero){
-    if(raiz == nullptr || raiz->obtenerDato() == nullptr)
+    if(arbol == nullptr || raiz->obtenerDato() == nullptr)
 	{
-		cout<<"No Hay Clientes"<<endl;
 		return;
 	}
     inOrderBuscar(arbol->obtenerIzquierda(), numero);

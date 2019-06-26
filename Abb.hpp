@@ -16,7 +16,7 @@ private:
     void inOrderMostrar(Nodo<Cliente>* _arbol);
     void inOrderBuscar(Nodo<Cliente>* _arbol, string _numero);
     void preOrder(Nodo<Cliente>* _arbol);
-    void postOrder(Nodo<Cliente>* _arbol);
+    void postOrderBuscar(Nodo<Cliente>* _arbol, string _numero);
     void eliminarNodo(Nodo<Cliente>* _nodoEliminar);
     void eliminar(Nodo<Cliente>* _arbol,string _numero);
     Nodo<Cliente>* nodoMinimo(Nodo<Cliente>* _nodo);
@@ -46,7 +46,7 @@ public:
 
     void preOrder(){preOrder(raiz);}
 
-    void postOrder(){postOrder(raiz);}
+    void postOrderBuscar(string _numero){postOrderBuscar(raiz,_numero);}
 
     void obtenerNombreCliente(Nodo<Cliente>* arbol);
 
