@@ -10,7 +10,7 @@ void Familia::mostrarIntegrantes()
 	int tamanio = listaIndividuos->obtenerTamanio();
 	for (int i = 1; i <= tamanio ; i++){
 		string nombre = *(listaIndividuos->consultar(i));
-		cout << nombre << " ";
+		cout << nombre << " | ";
 	}
 	cout << endl;
 } 
