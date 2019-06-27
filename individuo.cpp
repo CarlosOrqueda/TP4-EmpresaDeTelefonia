@@ -1,11 +1,11 @@
 #include "individuo.hpp"
 
-Individuo::Individuo(string numero):Cliente(numero)
+Individuo::Individuo(string numero) : Cliente(numero)
 {
 	nombre = "";
 }
 
-Individuo::Individuo(string numero,string nombre):Cliente(numero)
+Individuo::Individuo(string numero, string nombre) : Cliente(numero)
 {
 	asignarNombre(nombre);
 }
@@ -19,9 +19,8 @@ string Individuo::obtenerNombre()
 }
 double Individuo::obtenerPrecioFinal()
 {
-	return precioBase = precioBase-(precioBase*0.1);
+	return precioBase = precioBase - (precioBase * 0.1);
 }
 Individuo::~Individuo()
 {
-	
 }

@@ -2,9 +2,8 @@
 
 Cliente::Cliente(string _numero)
 {
-    numeroTelefono = _numero;
+	numeroTelefono = _numero;
 }
-
 
 void Cliente::asignarNumero(string _numero)
 {
@@ -17,5 +16,4 @@ string Cliente::obtenerNumero()
 
 Cliente::~Cliente()
 {
-	
 }

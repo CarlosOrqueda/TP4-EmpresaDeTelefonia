@@ -6,16 +6,17 @@
 class Cliente : public Abonable
 {
 
-	protected:
-			string numeroTelefono;
-	public:
-            //CONSTRUCTOR
-			Cliente(string _numero);
-			//SETTERS/GETTERS
-			void asignarNumero(string _numero);
-			string obtenerNumero();
-			//DESTRUCTOR
-			virtual ~Cliente();
+protected:
+	string numeroTelefono;
+
+public:
+	//CONSTRUCTOR
+	Cliente(string _numero);
+	//SETTERS/GETTERS
+	void asignarNumero(string _numero);
+	string obtenerNumero();
+	//DESTRUCTOR
+	virtual ~Cliente();
 };
 
 #endif

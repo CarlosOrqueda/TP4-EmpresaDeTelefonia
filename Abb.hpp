@@ -4,56 +4,53 @@
 #include "cliente.hpp"
 #include "Nodo.hpp"
 
-class Abb {
+class Abb
+{
 
 private:
-    Nodo<Cliente>* raiz;
-    
-    void insertar(Nodo<Cliente>* _arbol, Cliente* _nuevoCliente);
-    int obtenerAltura(Nodo<Cliente>* _arbol);
-    bool balanceado(Nodo<Cliente>* _arbol);
-    void eliminarArbol(Nodo<Cliente>* _arbol);
-    void inOrderMostrar(Nodo<Cliente>* _arbol);
-    void inOrderBuscar(Nodo<Cliente>* _arbol, string _numero);
-    void preOrder(Nodo<Cliente>* _arbol);
-    void postOrderBuscar(Nodo<Cliente>* _arbol, string _numero);
-    void eliminarNodo(Nodo<Cliente>* _nodoEliminar);
-    void eliminar(Nodo<Cliente>* _arbol,string _numero);
-    Nodo<Cliente>* nodoMinimo(Nodo<Cliente>* _nodo);
-    void destruirNodo(Nodo<Cliente>* _nodo);
-    void reemplazar(Nodo<Cliente>* arbol, Nodo<Cliente>* nodoEliminar, Nodo<Cliente>* nodoHijoDeEliminar);
+    Nodo<Cliente> *raiz;
+    //pre: recibe un arbol y un nuevo dato tipo cliente
+    void insertar(Nodo<Cliente> *_arbol, Cliente *_nuevoCliente);
+    //Recibe un arbol y lo recorre eliminando nodos. Se utiliza en el destructor del arbol
+    void eliminarArbol(Nodo<Cliente> *_arbol);
+    //Recorre y muestra los datos del arbol
+    void inOrderMostrar(Nodo<Cliente> *_arbol);
+    //Recorre el arbol y muestra el cliente comparando numeros
+    void postOrderBuscar(Nodo<Cliente> *_arbol, string _numero);
+    //Compara casos y aplica el metodo correcto para eliminar y mantener balanceado el arbol y luego llama a destruirNodo
+    void eliminarNodo(Nodo<Cliente> *_nodoEliminar);
+    //Recorre el arbol comparando por numero hasta encontrar el nodo a eliminar y luego llama a eliminarNodo
+    void eliminar(Nodo<Cliente> *_arbol, string _numero);
+    //Busca el menor de los mayores en el caso de que el nodo a eliminar tenga dos hijos
+    Nodo<Cliente> *nodoMinimo(Nodo<Cliente> *_nodo);
+    //Asigan Null a los hijos y libera la memoria que utilizaba el nodo
+    void destruirNodo(Nodo<Cliente> *_nodo);
+    //Asigna el hijo del nodo a eliminar, al padre del mismo. Se utiliza cuando dicho nodo tienen un solo nodo
+    void reemplazar(Nodo<Cliente> *arbol, Nodo<Cliente> *nodoEliminar, Nodo<Cliente> *nodoHijoDeEliminar);
 
 public:
+    //Llamamos a las funciones privadas para pasarle la raiz como parametro
+
+    //COnstructor
     Abb();
 
-    Nodo<Cliente>* obtenerRaiz();
+    Nodo<Cliente> *obtenerRaiz();
 
-    void insertar(Cliente* _nuevoCliente){insertar(raiz,_nuevoCliente);}
+    void insertar(Cliente *_nuevoCliente) { insertar(raiz, _nuevoCliente); }
 
-    int obtenerAltura(){return obtenerAltura(raiz);}
+    void eliminarArbol() { eliminarArbol(raiz); }
 
-    bool balanceado(){return balanceado(raiz);}
+    void inOrderMostrar() { inOrderMostrar(raiz); }
 
-    Nodo<Cliente>* obtenerNodoMaximo();
+    void postOrderBuscar(string _numero) { postOrderBuscar(raiz, _numero); }
 
-    Nodo<Cliente>* obtenerNodoMinimo();
+    void obtenerNombreCliente(Nodo<Cliente> *arbol);
 
-    void eliminarArbol(){eliminarArbol(raiz);}
+    void eliminar(string _numero) { eliminar(raiz, _numero); }
 
-    void inOrderMostrar(){inOrderMostrar(raiz);}
+    void reemplazar(Nodo<Cliente> *nodoEliminar, Nodo<Cliente> *nodoHijoDeEliminar) { reemplazar(raiz, nodoEliminar, nodoHijoDeEliminar); }
 
-    void inOrderBuscar(string _numero){inOrderBuscar(raiz,_numero);}
-
-    void preOrder(){preOrder(raiz);}
-
-    void postOrderBuscar(string _numero){postOrderBuscar(raiz,_numero);}
-
-    void obtenerNombreCliente(Nodo<Cliente>* arbol);
-
-    void eliminar(string _numero){eliminar(raiz,_numero);}
-
-    void reemplazar(Nodo<Cliente>* nodoEliminar, Nodo<Cliente>* nodoHijoDeEliminar){reemplazar(raiz, nodoEliminar, nodoHijoDeEliminar);}
-
+    //Destructor
     ~Abb();
 };
 #endif //ABB_H

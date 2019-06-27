@@ -9,24 +9,23 @@ template <typename Dato>
 
 class Nodo
 {
-	private:
-		Dato* dato;
-    	Nodo* izquierda;
-		Nodo* derecha;
+private:
+	Dato *dato;
+	Nodo *izquierda;
+	Nodo *derecha;
 
-	public:
-
-		//CONSTRUCTORES
-		Nodo<Dato>();
-		Nodo<Dato>(Dato* _dato);
-		Nodo<Dato>(Dato* _dato, Nodo* _izquierda, Nodo* _derecha);
-		//SETTERS/GETTERS
-		void asignarDato(Dato* _dato);
-		void asignarIzquierda(Nodo* izquierda);
-		void asignarDerecha(Nodo* derecha);
-		Dato* obtenerDato();
-		Nodo* obtenerIzquierda();
-		Nodo* obtenerDerecha();
+public:
+	//CONSTRUCTORES
+	Nodo<Dato>();
+	Nodo<Dato>(Dato *_dato);
+	Nodo<Dato>(Dato *_dato, Nodo *_izquierda, Nodo *_derecha);
+	//SETTERS/GETTERS
+	void asignarDato(Dato *_dato);
+	void asignarIzquierda(Nodo *izquierda);
+	void asignarDerecha(Nodo *derecha);
+	Dato *obtenerDato();
+	Nodo *obtenerIzquierda();
+	Nodo *obtenerDerecha();
 };
 
 //Constructor
@@ -45,7 +44,7 @@ Nodo<Dato>::Nodo(Dato *_dato)
 	derecha = NULL;
 }
 template <typename Dato>
-Nodo<Dato>::Nodo(Dato* _dato, Nodo* _izquierda, Nodo* _derecha)
+Nodo<Dato>::Nodo(Dato *_dato, Nodo *_izquierda, Nodo *_derecha)
 {
 	dato = _dato;
 	izquierda = _izquierda;
@@ -71,17 +70,17 @@ void Nodo<Dato>::asignarDerecha(Nodo<Dato> *_derecha)
 
 //Obtener
 template <typename Dato>
-Dato* Nodo<Dato>::obtenerDato()
+Dato *Nodo<Dato>::obtenerDato()
 {
 	return dato;
 }
 template <typename Dato>
-Nodo<Dato>* Nodo<Dato>::obtenerIzquierda()
+Nodo<Dato> *Nodo<Dato>::obtenerIzquierda()
 {
 	return izquierda;
 }
 template <typename Dato>
-Nodo<Dato>* Nodo<Dato>::obtenerDerecha()
+Nodo<Dato> *Nodo<Dato>::obtenerDerecha()
 {
 	return derecha;
 }

@@ -86,96 +86,31 @@ bool Menu::obtenerSalir()
 	return salir;
 }
 
-/* void Menu::leerArchivo(Abb *_arbol)
+void Menu::leerArchivo(Abb *_arbol)
 {
-	string nombreArchivo;
-	cout << "Inserte Nombre Archivo: ";
-	cin >> nombreArchivo;
-
-	ifstream archivoClientes(nombreArchivo);
-	if (!archivoClientes.is_open())
-	{
-		cout << "ERROR Archivo inexistente" << endl;
-	}
-	else
-	{
-		string numero;  //NUM. TEL.
-		string nombres; //STRING DE DONDE SE EXTRAERAN LAS SUBSTR
-		string buscado = ",";
-		
-
-		while (archivoClientes.good())
-		{
-			if (getline(archivoClientes, numero, ','))
-			{
-				if (getline(archivoClientes, nombres, '\n'))
-				{
-					//Lista<string> *listaIntegrantes = new Lista<string>;
-					int cantidad = 0; //CANTIDAD INTEGRANTES (1 -> Individuo, sino, Familia)
-
-					int start = 0;
-					string *sub = new string();
-					int end = nombres.find(buscado, start);
-
-					*sub = nombres.substr(start, end);
-					cantidad++;
-
-					if(end == -1) //ES UN INDIVIDUO
-					{
-						Individuo *_individuo = new Individuo(numero, nombres);
-						_arbol->insertar(_individuo);
-					}
-					else if(end != -1) //ES UNA FAMILIA
-					{
-						Familia *_familia = new Familia(numero);
-						_familia->agregarIntegrantes(sub);
-						while( end != -1)
-						{
-							start = end+1;
-							end = nombres.find(buscado, start);
-							if(end == -1) //ES EL ULTIMO INTEGRANTE
-							{
-								string* integrante = new string();
-								*integrante = nombres.substr(start);
-								_familia->agregarIntegrantes(integrante);
-								cantidad++;
-							}
-							else //ES UN INTEGRANTE N
-							{
-								string* integrante = new string();
-								*integrante = nombres.substr(start, end -start);
-								_familia->agregarIntegrantes(integrante);
-								cantidad++;
-							}
-						}
-						_arbol->insertar(_familia);
-					}
-				}
-			}
-		}
-	}
-}
-*/
-void Menu::leerArchivo(Abb *_arbol){
 	string nombreArchivo;
 	cout << "Ingrese el nombre del archivo (csv): ";
 	cin >> nombreArchivo;
 
 	ifstream archivoClientes(nombreArchivo);
-	if (!archivoClientes.is_open()){
+	if (!archivoClientes.is_open())
+	{
 		cout << "ERROR Archivo Inexistente" << endl;
 		return;
 	}
 	string numero, lineaNombres, nombre, ultimoNombre;
-	while (archivoClientes.good()){
+	while (archivoClientes.good())
+	{
 		getline(archivoClientes, numero, ',');
 		getline(archivoClientes, lineaNombres);
 		if (!lineaNombres.empty() && lineaNombres[lineaNombres.size() - 1] == '\r')
-    		lineaNombres.erase(lineaNombres.size() - 1);
-		if (lineaNombres.find(',') != string::npos){
+			lineaNombres.erase(lineaNombres.size() - 1);
+		if (lineaNombres.find(',') != string::npos)
+		{
 			stringstream ss(lineaNombres);
 			Familia *_familia = new Familia(numero);
-			while(ss.good()){
+			while (ss.good())
+			{
 				getline(ss, nombre, ',');
 				string *nombreIntegrante = new string();
 				*nombreIntegrante = nombre;
@@ -184,11 +119,12 @@ void Menu::leerArchivo(Abb *_arbol){
 			}
 			_arbol->insertar(_familia);
 		}
-		else{
-			Individuo *_individuo = new Individuo(numero,lineaNombres);
-			_arbol -> insertar(_individuo);
+		else
+		{
+			Individuo *_individuo = new Individuo(numero, lineaNombres);
+			_arbol->insertar(_individuo);
 		}
-	}	
+	}
 }
 
 void Menu::darAlta(Abb *_arbol)
